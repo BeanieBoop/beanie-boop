@@ -1,13 +1,14 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-const LineItem = db.define('line item', {
-  name: {
-    type: Sequelize.STRING,
+const LineItem = db.define('lineitem', {
+  unitPrice: {
+    type: Sequelize.FLOAT,
     allowNull: false
   },
-  description: {
-    type: Sequelize.TEXT
+  quantity: {
+    type: Sequelize.INTEGER,
+    allowNull: false
   }
 })
 
