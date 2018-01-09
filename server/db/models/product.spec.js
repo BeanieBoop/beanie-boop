@@ -3,17 +3,25 @@
 const {expect} = require('chai')
 const db = require('../index')
 const Product = db.model('product')
+const Category = db.model('category')
 
 describe('Product model', () => {
 
   beforeEach(() => {
     return db.sync({force: true})
+    .then(()=>{
+      return Category.create({
+        name: "Scary Beanie Babies",
+        description: "Sharp teeth etc."
+      })
+    })
     .then(() => {
       return Product.create({
         name: 'Bloo',
         description: 'This beanie baby is a blue bunny',
         price: 15.99,
-        inventoryQuantity: 74
+        inventoryQuantity: 74,
+        categoryId: 1
       })
     })
   })

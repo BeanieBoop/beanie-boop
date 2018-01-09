@@ -12,14 +12,15 @@ describe('LineItem model', () => {
     .then(() => {
       return Order.create()
     })
-    .then((order) => {
+    .then(() => {
       // order.createLineItem({
       //   unitPrice: 30.00,
       //   quantity: 1
       // })
       return LineItem.create({
         unitPrice: 30.99,
-        quantity: 2
+        quantity: 2,
+        orderId: 1
       })
     })
   })

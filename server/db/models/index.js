@@ -12,18 +12,18 @@ const Order = require('./order')
  *    BlogPost.belongsTo(User)
  */
 Product.belongsTo(Category, {
-  // foreignKey: {
-  //   allowNull: false,
-  // },
+  foreignKey: {
+    allowNull: false,
+  },
   onDelete: 'CASCADE',
 })
 
 Category.hasMany(Product, { onDelete: 'CASCADE' })
 
 LineItem.belongsTo(Order, {
-  // foreignKey: {
-  //   allowNull: false
-  // },
+  foreignKey: {
+    allowNull: false
+  },
   onDelete: 'CASCADE'
 })
 
