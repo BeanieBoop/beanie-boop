@@ -17,13 +17,10 @@ router
 router
 .route('/:category')
   .get((req, res, next) => {
-    Category.findAll({
-      include: [
-        {
-          model: Products,
-          as: 'products',
-        },
-      ],
+    Category.findOne({
+      where: {
+        id: req.params.category
+      }
     })
     .then(products => res.json(products))
     .catch(next);
