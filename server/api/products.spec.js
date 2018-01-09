@@ -3,11 +3,11 @@ const request = require('supertest')
 const db = require('../db')
 const app = require('../index')
 const Product = db.model('product')
-
+const Category = db.model('category')
 
 describe('Product routes', () => {
   beforeEach(() => {
-    return db.sync()
+    return db.sync({force: true})
   })
 
   describe('/api/products/', () => {
@@ -16,12 +16,20 @@ describe('Product routes', () => {
 		const price = 6.89
 		const inventoryQuantity = 56
     beforeEach(() => {
-      return Product.create({
-        name,
-				description,
-				price,
-				inventoryQuantity
+			return Category.create({
+        name: "Scary Beanie Babies",
+        description: "Sharp teeth etc."
       })
+			.then(()=>{
+				return Product.create({
+	        name,
+					description,
+					price,
+					inventoryQuantity,
+					categoryId: 1
+	      })
+			})
+
     })
 
     it('GET /api/products', () => {
@@ -53,7 +61,8 @@ describe('Product routes', () => {
 				name: "Bear Beanie",
 				description: "This bear is the coolest looking beanie",
 				price: 10.56,
-				inventoryQuantity: 45
+				inventoryQuantity: 45,
+				categoryId: 1
 			}
 			return request(app)
 	      .post('/api/products')
