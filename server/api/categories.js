@@ -2,7 +2,6 @@
 const router = require('express').Router();
 
 const { Category } = require('../db/models');
-const { Products } = require('../db/models');
 
 // prettier-ignore
 router
@@ -15,14 +14,14 @@ router
 
 // prettier-ignore
 router
-.route('/:category')
+.route('/:categoryId')
   .get((req, res, next) => {
     Category.findOne({
       where: {
-        id: req.params.category
+        id: req.params.categoryId
       }
     })
-    .then(products => res.json(products))
+    .then(category => res.json(category))
     .catch(next);
 });
 
