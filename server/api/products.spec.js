@@ -10,13 +10,13 @@ describe('Product routes', () => {
   })
 
   describe('/api/products/', () => {
-    const title = 'Test Product'
+    const name = 'Test Product'
 		const description = 'Test Description'
 		const price = 6.89
 		const inventoryQuantity = 56
     beforeEach(() => {
       return Product.create({
-        title,
+        name,
 				description,
 				price,
 				inventoryQuantity
@@ -29,7 +29,7 @@ describe('Product routes', () => {
         .expect(200)
         .then(res => {
           expect(res.body).to.be.an('array')
-          expect(res.body[0].title).to.be.equal(title)
+          expect(res.body[0].name).to.be.equal(name)
 					expect(res.body[0].description).to.be.equal(description)
 					expect(res.body[0].price).to.be.equal(price)
 					expect(res.body[0].inventoryQuantity).to.be.equal(inventoryQuantity)
@@ -41,11 +41,44 @@ describe('Product routes', () => {
 				.expect(200)
 				.then(res => {
 					expect(res.body).to.be.an('object')
-					expect(res.body.title).to.be.equal(title)
+					expect(res.body.name).to.be.equal(name)
 					expect(res.body.description).to.be.equal(description)
 					expect(res.body.price).to.be.equal(price)
 					expect(res.body.inventoryQuantity).to.be.equal(inventoryQuantity)
 				})
+		})
+		it('POST /api/products/', () => {
+			const body = {
+				name: "Bear Beanie",
+				description: "This bear is the coolest looking beanie",
+				price: 10.56,
+				inventoryQuantity: 45
+			}
+			return request(app)
+	      .post('/api/products')
+	      .send(body)
+	      .then(function(res) {
+	        expect(res.body.name).to.be.equal('Bear Beanie');
+					expect(res.body.description).to.be.equal("This bear is the coolest looking beanie");
+					expect(res.body.price).to.be.equal(10.56);
+					expect(res.body.inventoryQuantity).to.be.equal(45);
+	        expect(res.statusCode).to.be.equal(200);
+	      })
+		})
+
+		it('PUT /api/products/', () => {
+			return request(app)
+	      .put('/api/products/1')
+	      .send({description: "new description"})
+				.then(function (res) {
+						expect(res.statusCode).to.be.equal(201);
+						expect(res.body[0].description).to.be.equal('new description');
+						return Product.findById(1);
+				})
+	      .then(function(res) {
+	        expect(res.name).to.be.equal('Test Product');
+					expect(res.description).to.be.equal('new description');
+	      })
 		})
   }) // end describe('/api/users')
 })
