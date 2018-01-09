@@ -20,11 +20,16 @@ router.get('/:id', (req, res, next) => {
 router.put('/:productId', (req, res, next) => {
 	const {productId} = req.params;
 	Product.update(req.body, {where: {id: productId}, returning: true})
-		.then(data => res.status(201).json(data[1]))
+		.then(data => res.status(200).json(data[1]))
 })
 
 router.post('/', (req, res, next) => {
   Product.create(req.body)
-    .then(product => res.status(200).json(product))
+    .then(product => res.status(201).json(product))
     .catch(next)
 })
+router.delete('/:productId', (req, res) => {
+	const {productId} = req.params;
+	Product.destroy({where: {id: productId}})
+	.then(data => res.status(202).json(data));
+});
