@@ -14,6 +14,10 @@ const Product = db.define('product', {
   },
   inventoryQuantity: {
     type: Sequelize.INTEGER
+  },
+  imgUrl: {
+    type: Sequelize.STRING,
+    defaultValue: '/public/ty-logo.png'
   }
 })
 
