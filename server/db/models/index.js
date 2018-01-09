@@ -9,9 +9,9 @@ const User = require('./user');
  *    BlogPost.belongsTo(User)
  */
 Product.belongsTo(Category, {
-  foreignKey: {
-    allowNull: false,
-  },
+  // foreignKey: {
+  //   allowNull: false,
+  // },
   as: 'category',
   onDelete: 'cascade',
 });

@@ -36,7 +36,6 @@ describe('Category model', () => {
         return category.validate()
             .catch(err => {
                 expect(err).to.exist
-                console.log('ERRROR!', err.errors)
                 expect(err.errors[0]).to.have.property('path', 'name')
             })
       })

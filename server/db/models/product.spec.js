@@ -20,11 +20,11 @@ describe('Product model', () => {
 
     it('contains name, description, price, and inventoryQuantity', () => {
       Product.findById(1)
-      .then(Product => {
-        expect(Product.name).to.exist
-        expect(Product.description).to.exist
-        expect(Product.price).to.exist
-        expect(Product.inventoryQuantity).to.exist
+      .then(product => {
+        expect(product.name).to.exist
+        expect(product.description).to.exist
+        expect(product.price).to.exist
+        expect(product.inventoryQuantity).to.exist
       })
       .catch(console.err)
     })
@@ -40,7 +40,6 @@ describe('Product model', () => {
         return product.validate()
             .catch(err => {
                 expect(err).to.exist
-                console.log('ERRROR!', err.errors)
                 expect(err.errors[0]).to.have.property('path', 'name')
             })
       })

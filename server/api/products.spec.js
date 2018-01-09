@@ -4,9 +4,10 @@ const db = require('../db')
 const app = require('../index')
 const Product = db.model('product')
 
+
 describe('Product routes', () => {
   beforeEach(() => {
-    return db.sync({force: true})
+    return db.sync()
   })
 
   describe('/api/products/', () => {
