@@ -8,7 +8,13 @@ const User = require('./user');
  *
  *    BlogPost.belongsTo(User)
  */
-Product.belongsTo(Category, { as: 'category', onDelete: 'cascade' });
+Product.belongsTo(Category, {
+  foreignKey: {
+    allowNull: false,
+  },
+  as: 'category',
+  onDelete: 'cascade',
+});
 Category.hasMany(Product, { onDelete: 'cascade' });
 
 /**
