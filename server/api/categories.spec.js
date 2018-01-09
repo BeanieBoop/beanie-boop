@@ -30,10 +30,40 @@ describe('Category routes', () => {
         });
     });
 
+    it('POST /api/categories', () => {
+      return request(app)
+        .post('/api/categories')
+        .expect(201)
+        .then(res => {
+          expect(res.body).to.be.an('array');
+          expect(res.body[0].name).to.be.equal(name);
+        });
+    });
+
     it('GET /api/categories/:categoryId', () => {
       return request(app)
         .get('/api/categories/1')
         .expect(200)
+        .then(res => {
+          expect(res.body).to.be.an('object');
+          expect(res.body.name).to.be.equal(name);
+        });
+    });
+
+    it('PUT /api/categories/:categoryId', () => {
+      return request(app)
+        .get('/api/categories/1')
+        .expect(200)
+        .then(res => {
+          expect(res.body).to.be.an('object');
+          expect(res.body.name).to.be.equal(name);
+        });
+    });
+
+    it('DELETE /api/categories/:categoryId', () => {
+      return request(app)
+        .get('/api/categories/1')
+        .expect(204)
         .then(res => {
           expect(res.body).to.be.an('object');
           expect(res.body.name).to.be.equal(name);
