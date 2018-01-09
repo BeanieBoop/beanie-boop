@@ -1,7 +1,9 @@
-const Category = require('./category');
-const Product = require('./product');
-const User = require('./user');
+const Category = require('./category')
+const Product = require('./product')
+const User = require('./user')
 const Review = require('./review')
+const LineItem = require('./lineitem')
+const Order = require('./order')
 
 /**
  * If we had any associations to make, this would be a great place to put them!
@@ -13,10 +15,19 @@ Product.belongsTo(Category, {
   // foreignKey: {
   //   allowNull: false,
   // },
-  as: 'category',
-  onDelete: 'cascade',
-});
-Category.hasMany(Product, { onDelete: 'cascade' });
+  onDelete: 'CASCADE',
+})
+
+Category.hasMany(Product, { onDelete: 'CASCADE' })
+
+LineItem.belongsTo(Order, {
+  // foreignKey: {
+  //   allowNull: false
+  // },
+  onDelete: 'CASCADE'
+})
+
+Order.hasMany(LineItem);
 
 /**
  * We'll export all of our models here, so that any time a module needs a model,
@@ -29,5 +40,7 @@ module.exports = {
   Category,
   Product,
   User,
-  Review
-};
+  Review,
+  LineItem,
+  Order
+}
