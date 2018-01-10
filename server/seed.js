@@ -250,7 +250,8 @@ const reviews = [{
 const users = [{
   "id": 1,
   "email": "schamp0@wired.com",
-  "password": "password"
+  "password": "password",
+  "isAdmin": "true"
 }, {
   "id": 2,
   "email": "cglantz1@ameblo.jp",
