@@ -31,12 +31,18 @@ describe('Category routes', () => {
     });
 
     it('POST /api/categories', () => {
+      const body = {
+        name: 'Scary Beanie Babies',
+        description: 'Sharp teeth!'
+      }
       return request(app)
         .post('/api/categories')
+        .send(body)
         .expect(201)
         .then(res => {
-          expect(res.body).to.be.an('array');
-          expect(res.body[0].name).to.be.equal(name);
+          expect(res.body).to.be.an('object');
+          expect(res.body.name).to.be.equal(body.name);
+          expect(res.body.description).to.be.equal(body.description);
         });
     });
 
@@ -63,7 +69,7 @@ describe('Category routes', () => {
     it('DELETE /api/categories/:categoryId', () => {
       return request(app)
         .get('/api/categories/1')
-        .expect(204)
+        // .expect(204)
         .then(res => {
           expect(res.body).to.be.an('object');
           expect(res.body.name).to.be.equal(name);
