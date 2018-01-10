@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
+const Category = require('./category')
 
 const Product = db.define('product', {
   name: {
@@ -18,6 +19,10 @@ const Product = db.define('product', {
   imgUrl: {
     type: Sequelize.STRING,
     defaultValue: '/public/ty-logo.png'
+  }
+}, {
+  defaultScope: {
+    include: [Category]
   }
 })
 

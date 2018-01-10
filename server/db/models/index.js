@@ -46,6 +46,7 @@ Review.belongsTo(User)
  */
 
 module.exports = {
+  db,
   Category,
   Product,
   User,
