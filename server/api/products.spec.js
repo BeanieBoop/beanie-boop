@@ -94,7 +94,6 @@ describe('Product routes', () => {
 			return request(app)
 	      .delete('/api/products/1')
 				.then(function (res) {
-						console.log(res)
 						expect(res.statusCode).to.be.equal(202);
 						expect(res.body).to.be.equal(1);
 				})

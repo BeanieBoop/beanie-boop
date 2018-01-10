@@ -10,16 +10,9 @@ describe('Order routes', () => {
   });
 
   describe('/api/orders/', () => {
-    const name = 'Test Order';
-    const description = 'Test Description';
-    const price = 6.89;
 
     beforeEach(() => {
-      return Product.create({
-        name,
-        description,
-        price,
-      });
+      return Order.create();
     });
 
     it('GET /api/orders', () => {
@@ -28,9 +21,6 @@ describe('Order routes', () => {
         .expect(200)
         .then(res => {
           expect(res.body).to.be.an('array');
-          expect(res.body[0].name).to.be.equal(name);
-          expect(res.body[0].description).to.be.equal(description);
-          expect(res.body[0].price).to.be.equal(price);
         });
     });
 
@@ -40,9 +30,7 @@ describe('Order routes', () => {
         .expect(200)
         .then(res => {
           expect(res.body).to.be.an('object');
-          expect(res.body.name).to.be.equal(name);
-          expect(res.body.description).to.be.equal(description);
-          expect(res.body.price).to.be.equal(price);
+          expect(res.body.id).to.be.equal(1);
         });
     });
 
