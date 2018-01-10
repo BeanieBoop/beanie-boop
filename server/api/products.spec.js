@@ -3,11 +3,11 @@ const request = require('supertest')
 const db = require('../db')
 const app = require('../index')
 const Product = db.model('product')
-
+const Category = db.model('category')
 
 describe('Product routes', () => {
   beforeEach(() => {
-    return db.sync()
+    return db.sync({force: true})
   })
 
   describe('/api/products/', () => {
@@ -16,12 +16,20 @@ describe('Product routes', () => {
 		const price = 6.89
 		const inventoryQuantity = 56
     beforeEach(() => {
-      return Product.create({
-        name,
-				description,
-				price,
-				inventoryQuantity
+			return Category.create({
+        name: "Scary Beanie Babies",
+        description: "Sharp teeth etc."
       })
+			.then(()=>{
+				return Product.create({
+	        name,
+					description,
+					price,
+					inventoryQuantity,
+					categoryId: 1
+	      })
+			})
+
     })
 
     it('GET /api/products', () => {
@@ -53,7 +61,8 @@ describe('Product routes', () => {
 				name: "Bear Beanie",
 				description: "This bear is the coolest looking beanie",
 				price: 10.56,
-				inventoryQuantity: 45
+				inventoryQuantity: 45,
+				categoryId: 1
 			}
 			return request(app)
 	      .post('/api/products')
@@ -63,7 +72,7 @@ describe('Product routes', () => {
 					expect(res.body.description).to.be.equal("This bear is the coolest looking beanie");
 					expect(res.body.price).to.be.equal(10.56);
 					expect(res.body.inventoryQuantity).to.be.equal(45);
-	        expect(res.statusCode).to.be.equal(200);
+	        expect(res.statusCode).to.be.equal(201);
 	      })
 		})
 
@@ -72,7 +81,7 @@ describe('Product routes', () => {
 	      .put('/api/products/1')
 	      .send({description: "new description"})
 				.then(function (res) {
-						expect(res.statusCode).to.be.equal(201);
+						expect(res.statusCode).to.be.equal(200);
 						expect(res.body[0].description).to.be.equal('new description');
 						return Product.findById(1);
 				})
@@ -80,6 +89,15 @@ describe('Product routes', () => {
 	        expect(res.name).to.be.equal('Test Product');
 					expect(res.description).to.be.equal('new description');
 	      })
+		})
+		it('DELETE /api/products/:id', () => {
+			return request(app)
+	      .delete('/api/products/1')
+				.then(function (res) {
+						console.log(res)
+						expect(res.statusCode).to.be.equal(202);
+						expect(res.body).to.be.equal(1);
+				})
 		})
   }) // end describe('/api/users')
 })

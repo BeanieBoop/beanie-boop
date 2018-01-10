@@ -1,9 +1,12 @@
+const db = require('../db')
 const Category = require('./category')
 const Product = require('./product')
 const User = require('./user')
 const Review = require('./review')
 const LineItem = require('./lineitem')
 const Order = require('./order')
+
+// const Session = db.model('Session')
 
 /**
  * If we had any associations to make, this would be a great place to put them!
@@ -12,22 +15,25 @@ const Order = require('./order')
  *    BlogPost.belongsTo(User)
  */
 Product.belongsTo(Category, {
-  // foreignKey: {
-  //   allowNull: false,
-  // },
+  foreignKey: {
+    allowNull: false,
+  },
   onDelete: 'CASCADE',
 })
 
 Category.hasMany(Product, { onDelete: 'CASCADE' })
 
 LineItem.belongsTo(Order, {
-  // foreignKey: {
-  //   allowNull: false
-  // },
+  foreignKey: {
+    allowNull: false
+  },
   onDelete: 'CASCADE'
 })
 
-Order.hasMany(LineItem);
+Order.hasMany(LineItem)
+
+Order.belongsTo(User)
+// Order.belongsTo(Session)
 
 /**
  * We'll export all of our models here, so that any time a module needs a model,
