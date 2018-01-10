@@ -6,7 +6,7 @@ const Order = db.model('order');
 
 describe('Order routes', () => {
   beforeEach(() => {
-    return db.sync();
+    return db.sync({force: true});
   });
 
   describe('/api/orders/', () => {
@@ -34,22 +34,18 @@ describe('Order routes', () => {
         });
     });
 
-    // it('POST /api/orders/', () => {
-    //   const body = {
-    //     name: 'Bear Beanie',
-    //     description: 'This bear is the coolest looking beanie',
-    //     price: 10.56,
-    //   };
-    //   return request(app)
-    //     .post('/api/orders')
-    //     .send(body)
-    //     .then(function(res) {
-    //       expect(res.body.name).to.be.equal('Bear Beanie');
-    //       expect(res.body.description).to.be.equal('This bear is the coolest looking beanie');
-    //       expect(res.body.price).to.be.equal(10.56);
-    //       expect(res.statusCode).to.be.equal(200);
-    //     });
-    // });
+
+
+    it('POST /api/orders/', () => {
+      return request(app)
+        .post('/api/orders')
+        .send({})
+        .then(function(res) {
+          expect(res.statusCode).to.be.equal(201);
+          expect(res.body).to.be.an('object');
+          expect(res.body.id).to.be.equal(2);
+        });
+    });
 
     // it('PUT /api/orders/:orderId', () => {
     //   return request(app)
