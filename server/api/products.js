@@ -9,6 +9,7 @@ router.get('/', (req, res, next) => {
     .catch(next)
 })
 
+// JM - consistent
 router.get('/:id', (req, res, next) => {
   Product.findOne({
 		where: {id: req.params.id}

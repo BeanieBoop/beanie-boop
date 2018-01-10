@@ -2,6 +2,7 @@ const router = require('express').Router();
 const {Review} = require('../db/models')
 module.exports = router
 
+// JM - very RESTful!
 
 router.get('/', (req, res, next) => {
   Review.findAll()
@@ -9,6 +10,7 @@ router.get('/', (req, res, next) => {
     .catch(next)
 })
 
+// JM - just :id
 router.get('/:reviewId', (req, res, next) => {
   Review.findOne({
 		where: {id: req.params.reviewId}

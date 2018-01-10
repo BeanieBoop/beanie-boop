@@ -34,6 +34,7 @@ router
       .catch(next);
   })
   .delete((req, res, next) => {
+    // JM same here
     req.params.categoryId.destroy().then(() => res.status(204).end());
   });
 

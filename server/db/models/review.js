@@ -2,6 +2,7 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 
 const Review = db.define('review', {
+  // JM - maybe have integer here, then have a method on product to get avg rating?
   rating: {
     type: Sequelize.FLOAT,
     allowNull: false,
@@ -14,6 +15,7 @@ const Review = db.define('review', {
     type: Sequelize.TEXT,
     validate: {
       len: [4, 250]
+      // JM - maybe have validation error message?
     }
   }
 })

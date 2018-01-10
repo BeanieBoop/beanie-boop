@@ -14,6 +14,8 @@ const Order = require('./order')
  *
  *    BlogPost.belongsTo(User)
  */
+
+ // JM - maybe don't need onDelete
 Product.belongsTo(Category, {
   foreignKey: {
     allowNull: false,
@@ -32,6 +34,9 @@ LineItem.belongsTo(Order, {
 Order.hasMany(LineItem)
 
 Order.belongsTo(User)
+// JM - do reciprocal association
+// User.hasMany(Order)
+
 // Order.belongsTo(Session)
 
 LineItem.belongsTo(Product);

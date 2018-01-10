@@ -3,6 +3,7 @@ const router = require('express').Router();
 
 const { Order } = require('../db/models');
 
+// JM - consistency
 router
   .route('/')
   .get((req, res, next) => {
@@ -34,6 +35,9 @@ router
       .catch(next);
   })
   .delete((req, res, next) => {
+    // JM - ?
+    // req.params.orderId === '3'
+    // '3'.destroy()
     req.params.orderId.destroy().then(() => res.status(204).end());
   });
 
