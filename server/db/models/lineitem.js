@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
+const Order = require('./order')
 
 const LineItem = db.define('lineitem', {
   unitPrice: {
@@ -9,6 +10,10 @@ const LineItem = db.define('lineitem', {
   quantity: {
     type: Sequelize.INTEGER,
     allowNull: false
+  }
+}, {
+  defaultScope: {
+    include: [Order]
   }
 })
 
