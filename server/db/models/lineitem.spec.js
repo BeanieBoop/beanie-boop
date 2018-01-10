@@ -4,6 +4,8 @@ const {expect} = require('chai')
 const db = require('../index')
 const LineItem = db.model('lineitem')
 const Order = db.model('order')
+const Product = db.model('product')
+const Category = db.model('category')
 
 describe('LineItem model', () => {
 
@@ -13,14 +15,26 @@ describe('LineItem model', () => {
       return Order.create()
     })
     .then(() => {
-      // order.createLineItem({
-      //   unitPrice: 30.00,
-      //   quantity: 1
-      // })
+      return Category.create({
+        name: 'Limited Edition',
+        description: 'This category is used to find all limited edition beanie babies.'
+      })
+    })
+    .then(() => {
+      return Product.create({
+        name: 'Bloo',
+        description: 'This beanie baby is a blue bunny',
+        price: 15.99,
+        inventoryQuantity: 74,
+        categoryId: 1
+      })
+    })
+    .then(() => {
       return LineItem.create({
         unitPrice: 30.99,
         quantity: 2,
-        orderId: 1
+        orderId: 1,
+        productId: 1
       })
     })
   })

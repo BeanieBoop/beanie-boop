@@ -29,11 +29,14 @@ LineItem.belongsTo(Order, {
   },
   onDelete: 'CASCADE'
 })
-
 Order.hasMany(LineItem)
 
 Order.belongsTo(User)
 // Order.belongsTo(Session)
+
+LineItem.belongsTo(Product);
+
+Review.belongsTo(User)
 
 /**
  * We'll export all of our models here, so that any time a module needs a model,
