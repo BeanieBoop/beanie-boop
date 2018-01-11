@@ -33,12 +33,12 @@ describe('Category routes', () => {
     it('POST /api/categories', () => {
       const body = {
         name: 'Scary Beanie Babies',
-        description: 'Sharp teeth!'
-      }
+        description: 'Sharp teeth!',
+      };
       return request(app)
         .post('/api/categories')
         .send(body)
-        .expect(201)
+        .expect(202)
         .then(res => {
           expect(res.body).to.be.an('object');
           expect(res.body.name).to.be.equal(body.name);
@@ -46,7 +46,7 @@ describe('Category routes', () => {
         });
     });
 
-    it('GET /api/categories/:categoryId', () => {
+    it('GET /api/categories/:id', () => {
       return request(app)
         .get('/api/categories/1')
         .expect(200)
@@ -56,23 +56,26 @@ describe('Category routes', () => {
         });
     });
 
-    it('PUT /api/categories/:categoryId', () => {
+    it('PUT /api/categories/:id', () => {
       return request(app)
-        .get('/api/categories/1')
-        .expect(200)
-        .then(res => {
-          expect(res.body).to.be.an('object');
-          expect(res.body.name).to.be.equal(name);
+        .put('/api/categories/1')
+        .send({ name: 'new category name' })
+        .then(function(res) {
+          expect(res.statusCode).to.be.equal(202);
+          expect(res.body.name).to.be.equal('new category name');
+          return Category.findById(1);
+        })
+        .then(function(res) {
+          expect(res.name).to.be.equal('new category name');
         });
     });
 
-    it('DELETE /api/categories/:categoryId', () => {
+    it('DELETE /api/categories/:id', () => {
       return request(app)
-        .get('/api/categories/1')
-        // .expect(204)
+        .delete('/api/categories/1')
         .then(res => {
-          expect(res.body).to.be.an('object');
-          expect(res.body.name).to.be.equal(name);
+          expect(res.statusCode).to.be.equal(202);
+          expect(res.body).to.be.equal(1);
         });
     });
   }); // end describe('/api/categories')
