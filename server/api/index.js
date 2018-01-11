@@ -7,7 +7,7 @@ router.use('/products', require('./products'))
 router.use('/categories', require('./categories'));
 router.use('/reviews', require('./reviews'));
 router.use('/orders', require('./orders'));
-router.use('/lineItem', require('./lineItem'));
+router.use('/lineItems', require('./lineItems'));
 
 
 

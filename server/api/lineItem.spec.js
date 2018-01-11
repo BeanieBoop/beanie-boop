@@ -44,7 +44,7 @@ describe('LineItem routes', () => {
 				quantity: 5
 			}
 			return request(app)
-	      .post('/api/lineItem')
+	      .post('/api/lineItems')
 	      .send(body)
 	      .then(function(res) {
 	        expect(res.body.productId).to.be.equal(1);
@@ -75,7 +75,7 @@ describe('LineItem routes', () => {
 		        categoryId: 1
 		      })
 		    })
-				
+
 
     })
 		it('POST /api/lineItem/', () => {
@@ -85,7 +85,7 @@ describe('LineItem routes', () => {
 				quantity: 5
 			}
 			return request(app)
-	      .post('/api/lineItem')
+	      .post('/api/lineItems')
 	      .send(body)
 	      .then(function(res) {
 	        expect(res.body.productId).to.be.equal(1);
