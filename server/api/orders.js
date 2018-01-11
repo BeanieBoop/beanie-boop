@@ -1,7 +1,7 @@
 'use strict';
 const router = require('express').Router();
-
 const { Order } = require('../db/models');
+module.exports = router;
 
 router.get('/', (req, res, next) => {
   Order.findAll()
@@ -36,4 +36,3 @@ router.delete('/:id', (req, res, next) => {
   Order.destroy({ where: { id: req.params.id } }).then(data => res.status(202).json(data));
 });
 
-module.exports = router;
