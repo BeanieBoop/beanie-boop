@@ -32,7 +32,7 @@ router.get('/:id', (req, res, next) => {
 
 router.put('/:id', isAdmin, (req, res, next) => {
   const { id } = req.params;
-  Product.update(req.body, { where: { id: productId }, returning: true }).then(data => res.status(200).json(data[1]));
+  Product.update(req.body, { where: { id: id }, returning: true }).then(data => res.status(200).json(data[1]));
 });
 
 
@@ -44,7 +44,7 @@ router.post('/', isAdmin, (req, res, next) => {
 
 router.delete('/:id', isAdmin, (req, res, next) => {
   const { id } = req.params;
-  Product.destroy({ where: { id: productId } })
+  Product.destroy({ where: { id: id } })
     .then(data => res.status(202).json(data))
     .catch(next);
 });

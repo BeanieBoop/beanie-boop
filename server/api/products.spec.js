@@ -13,7 +13,7 @@ describe('Product routes', () => {
   before(() => {
 		const name = 'Test Product'
 		const description = 'Test Description'
-		const price = 6.89
+		const price = 7
 		const inventoryQuantity = 56
 
     return db.sync({force: true})
@@ -46,7 +46,7 @@ describe('Product routes', () => {
   describe('NON-ADMIN /api/products/', () => {
 		const name = 'Test Product'
 		const description = 'Test Description'
-		const price = 6.89
+		const price = 7
 		const inventoryQuantity = 56
     it('GET /api/products', () => {
       return request(app)
@@ -80,7 +80,7 @@ describe('Product routes', () => {
 			const body = {
 				name: "Bear Beanie",
 				description: "This bear is the coolest looking beanie",
-				price: 10.56,
+				price: 11,
 				inventoryQuantity: 45,
 				categoryId: 1
 			}
@@ -90,7 +90,7 @@ describe('Product routes', () => {
 	      .then(function(res) {
 	        expect(res.body.name).to.be.equal('Bear Beanie');
 					expect(res.body.description).to.be.equal("This bear is the coolest looking beanie");
-					expect(res.body.price).to.be.equal(10.56);
+					expect(res.body.price).to.be.equal(11);
 					expect(res.body.inventoryQuantity).to.be.equal(45);
 	        expect(res.statusCode).to.be.equal(201);
 	      })
@@ -100,7 +100,7 @@ describe('Product routes', () => {
 			const body = {
 				name: "Bear Beanie",
 				description: "This bear is the coolest looking beanie",
-				price: 10.56,
+				price: 11,
 				inventoryQuantity: 45,
 				categoryId: 1
 			}
@@ -149,7 +149,7 @@ describe('Product routes', () => {
 	      .delete('/api/products/1')
 				.then(function (res) {
 						expect(res.statusCode).to.be.equal(500);
-						
+
 				})
 		})
   }) // end describe('/api/users')

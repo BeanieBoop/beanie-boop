@@ -4,13 +4,23 @@ const db = require('../db');
 const app = require('../index');
 const Order = db.model('order');
 
+const agent = request.agent(app);
+
 describe('Order routes', () => {
-  beforeEach(() => {
-    return db.sync({ force: true });
+  before(() => {
+    return db.sync({ force: true })
+    .then(()=>{
+      return agent
+        .post('/auth/signup')
+        .send({ email: 'shaunoff@gmail.com', password: 'password' })
+        .then(()=>{
+          return console.log('user created')
+        })
+    });
   });
 
   describe('/api/orders/', () => {
-    beforeEach(() => {
+    before(() => {
       return Order.create();
     });
 
@@ -53,15 +63,24 @@ describe('Order routes', () => {
           return Order.findById(1);
         });
     });
+    describe('AUTHORISED /api/orders/', () => {
+      it('LOGGED-IN DELETE /api/orders/:id', () => {
+        return agent
+          .delete('/api/orders/1')
+          .then(res => {
+            expect(res.statusCode).to.be.equal(202);
+            expect(res.body).to.be.equal(1);
+          });
+      });
+      it('LOGGED-OUT DELETE /api/orders/:id', () => {
+        return request(app)
+          .delete('/api/orders/1')
+          .then(res => {
+            expect(res.statusCode).to.be.equal(500);
+          });
+      });
+    })
 
-    it('DELETE /api/orders/:id', () => {
-      return request(app)
-        .delete('/api/orders/1')
-        .then(res => {
-          expect(res.statusCode).to.be.equal(202);
-          expect(res.body).to.be.equal(1);
-        });
-    });
     // });
   }); // end describe('/api/orders')
 });
