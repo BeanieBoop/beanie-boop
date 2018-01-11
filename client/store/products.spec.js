@@ -31,17 +31,17 @@ import MockAdapter from 'axios-mock-adapter'
 import configureMockStore from 'redux-mock-store'
 import thunkMiddleware from 'redux-thunk'
 
-
-const mockAxios = new MockAdapter(axios)
 const middlewares = [thunkMiddleware]
 const mockStore = configureMockStore(middlewares)
 
 describe('thunk creators', () => {
 
 	let store
-
+  let mockAxios
 	beforeEach(() => {
+    mockAxios = new MockAdapter(axios)
 		store = mockStore()
+
 	})
 
 	afterEach(() => {
