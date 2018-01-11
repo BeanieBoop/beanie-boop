@@ -26,7 +26,7 @@ describe('LineItem routes', () => {
 		      return Product.create({
 		        name: 'Bloo',
 		        description: 'This beanie baby is a blue bunny',
-		        price: 15.99,
+		        price: 16,
 		        inventoryQuantity: 74,
 		        categoryId: 1
 		      })
@@ -40,7 +40,7 @@ describe('LineItem routes', () => {
 			const body = {
 				productId: 1,
 				orderId: 1,
-				unitPrice: 34.56,
+				unitPrice: 35,
 				quantity: 5
 			}
 			return request(app)
@@ -49,7 +49,7 @@ describe('LineItem routes', () => {
 	      .then(function(res) {
 	        expect(res.body.productId).to.be.equal(1);
 					expect(res.body.orderId).to.be.equal(1);
-					expect(res.body.unitPrice).to.be.equal(34.56);
+					expect(res.body.unitPrice).to.be.equal(35);
 					expect(res.body.quantity).to.be.equal(5);
 	      })
 		})
@@ -70,7 +70,7 @@ describe('LineItem routes', () => {
 		      return Product.create({
 		        name: 'Bloo',
 		        description: 'This beanie baby is a blue bunny',
-		        price: 15.99,
+		        price: 16,
 		        inventoryQuantity: 74,
 		        categoryId: 1
 		      })
@@ -81,7 +81,7 @@ describe('LineItem routes', () => {
 		it('POST /api/lineItem/', () => {
 			const body = {
 				productId: 1,
-				unitPrice: 34.56,
+				unitPrice: 35,
 				quantity: 5
 			}
 			return request(app)
@@ -90,7 +90,7 @@ describe('LineItem routes', () => {
 	      .then(function(res) {
 	        expect(res.body.productId).to.be.equal(1);
 					expect(res.body.orderId).to.be.equal(1);
-					expect(res.body.unitPrice).to.be.equal(34.56);
+					expect(res.body.unitPrice).to.be.equal(35);
 					expect(res.body.quantity).to.be.equal(5);
 	      })
 		})

@@ -3,6 +3,14 @@ const router = require('express').Router();
 const { Order } = require('../db/models');
 module.exports = router;
 
+function isUser(req, res, next){
+  if(req.user){
+    next()
+  } else {
+    next('error')
+  }
+}
+
 router.get('/', (req, res, next) => {
   Order.findAll()
     .then(orders => res.json(orders))
@@ -32,7 +40,6 @@ router.post('/', (req, res, next) => {
     .catch(next);
 });
 
-router.delete('/:id', (req, res, next) => {
+router.delete('/:id', isUser, (req, res, next) => {
   Order.destroy({ where: { id: req.params.id } }).then(data => res.status(202).json(data));
 });
-
