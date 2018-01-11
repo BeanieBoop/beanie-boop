@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 const Category = require('./category')
+const Review = require('./review')
 
 const Product = db.define('product', {
   name: {
@@ -11,7 +12,7 @@ const Product = db.define('product', {
     type: Sequelize.TEXT
   },
   price: {
-    type: Sequelize.FLOAT
+    type: Sequelize.INTEGER
   },
   inventoryQuantity: {
     type: Sequelize.INTEGER

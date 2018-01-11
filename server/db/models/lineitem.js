@@ -4,16 +4,12 @@ const Order = require('./order')
 
 const LineItem = db.define('lineitem', {
   unitPrice: {
-    type: Sequelize.FLOAT,
+    type: Sequelize.INTEGER,
     allowNull: false
   },
   quantity: {
     type: Sequelize.INTEGER,
     allowNull: false
-  }
-}, {
-  defaultScope: {
-    include: [Order]
   }
 })
 
