@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 const User = require('./user')
+const Product = require('./product')
 
 const Review = db.define('review', {
   rating: {
@@ -16,10 +17,6 @@ const Review = db.define('review', {
     validate: {
       len: [4, 250]
     }
-  }
-}, {
-  defaultScope: {
-    include: [User]
   }
 })
 

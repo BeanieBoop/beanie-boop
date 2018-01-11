@@ -6,44 +6,24 @@ const Review = require('./review')
 const LineItem = require('./lineitem')
 const Order = require('./order')
 
-// const Session = db.model('Session')
 
-/**
- * If we had any associations to make, this would be a great place to put them!
- * ex. if we had another model called BlogPost, we might say:
- *
- *    BlogPost.belongsTo(User)
- */
-Product.belongsTo(Category, {
-  foreignKey: {
-    allowNull: false,
-  },
-  onDelete: 'CASCADE',
-})
+Product.belongsTo(Category)
+Category.hasMany(Product)
 
-Category.hasMany(Product, { onDelete: 'CASCADE' })
-
-LineItem.belongsTo(Order, {
-  foreignKey: {
-    allowNull: false
-  },
-  onDelete: 'CASCADE'
-})
+LineItem.belongsTo(Order)
 Order.hasMany(LineItem)
 
 Order.belongsTo(User)
-// Order.belongsTo(Session)
+User.hasMany(Order)
 
-LineItem.belongsTo(Product);
+LineItem.belongsTo(Product)
+Product.hasMany(LineItem)
 
 Review.belongsTo(User)
+User.hasMany(Review)
 
-/**
- * We'll export all of our models here, so that any time a module needs a model,
- * we can just require it from 'db/models'
- * for example, we can say: const {User} = require('../db/models')
- * instead of: const User = require('../db/models/user')
- */
+Review.belongsTo(Product)
+Product.hasMany(Review)
 
 module.exports = {
   db,

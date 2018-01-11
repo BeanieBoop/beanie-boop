@@ -14,7 +14,9 @@ function isAdmin(req, res, next) {
 }
 
 router.get('/', (req, res, next) => {
-  Product.findAll()
+  Product.findAll({
+    order: [['id', 'ASC']]
+  })
     .then(products => res.json(products))
     .catch(next);
 });
@@ -27,19 +29,21 @@ router.get('/:id', (req, res, next) => {
     .catch(next);
 });
 
-router.put('/:productId', isAdmin, (req, res, next) => {
-  const { productId } = req.params;
+
+router.put('/:id', isAdmin, (req, res, next) => {
+  const { id } = req.params;
   Product.update(req.body, { where: { id: productId }, returning: true }).then(data => res.status(200).json(data[1]));
 });
+
 
 router.post('/', isAdmin, (req, res, next) => {
   Product.create(req.body)
     .then(product => res.status(201).json(product))
-    .catch(next);
+    .catch(next)
 });
 
-router.delete('/:productId', isAdmin, (req, res, next) => {
-  const { productId } = req.params;
+router.delete('/:id', isAdmin, (req, res, next) => {
+  const { id } = req.params;
   Product.destroy({ where: { id: productId } })
     .then(data => res.status(202).json(data))
     .catch(next);
