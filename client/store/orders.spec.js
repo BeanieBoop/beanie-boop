@@ -92,7 +92,7 @@ describe('thunk creators', () => {
         .then(() => {
           const actions = store.getActions()
           expect(actions[0].type).to.be.equal(CREATE_ORDER)
-          expect(actions[0].product).to.be.deep.equal(fakeNewOrder)
+          expect(actions[0].order).to.be.deep.equal(fakeNewOrder)
         })
     })
 
@@ -119,9 +119,8 @@ describe('thunk creators', () => {
       return store.dispatch(putOrder(fakeOrderId, fakeUpdate))
         .then(() => {
           const actions = store.getActions()
-          console.log(actions)
           expect(actions[0].type).to.be.equal(EDIT_ORDER)
-          expect(actions[0].product).to.be.deep.equal(fakeUpdatedOrder)
+          expect(actions[0].order).to.be.deep.equal(fakeUpdatedOrder)
         })
     })
 
@@ -133,14 +132,14 @@ describe('thunk creators', () => {
 
     it('dispatches the DELETE_ORDER action', () => {
 
-      mockAxios.onDelete('/api/products/1').replyOnce(204)
+      mockAxios.onDelete('/api/orders/1').replyOnce(204)
 
       return store.dispatch(destroyOrder(1))
         .then(() => {
           const actions = store.getActions()
           console.log(actions)
-          expect(actions[0].type).to.be.equal(DELETE_PRODUCT)
-          expect(actions[0].productId).to.be.deep.equal(1)
+          expect(actions[0].type).to.be.equal(DELETE_ORDER)
+          expect(actions[0].orderId).to.be.deep.equal(1)
         })
     })
 

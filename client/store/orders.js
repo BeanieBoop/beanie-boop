@@ -43,7 +43,7 @@ export const postOrder = (formData) =>
 
 export const putOrder = (orderId, formData) =>
   dispatch =>
-    axios.put(`/api/products/${orderId}`, formData)
+    axios.put(`/api/orders/${orderId}`, formData)
       .then(res => res.data)
       .then(order => {
         const action = editOrder(order);
@@ -54,7 +54,7 @@ export const putOrder = (orderId, formData) =>
 
 export const destroyOrder = (orderId) =>
   dispatch =>
-    axios.delete(`/api/products/${orderId}`)
+    axios.delete(`/api/orders/${orderId}`)
       .then(() => {
         const action = deleteOrder(orderId);
         dispatch(action);

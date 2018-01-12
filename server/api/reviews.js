@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const {Review} = require('../db/models')
+const { Review, Product, User} = require('../db/models')
 module.exports = router
 
 function isUser(req, res, next){
@@ -11,7 +11,9 @@ function isUser(req, res, next){
 }
 
 router.get('/', (req, res, next) => {
-  Review.findAll()
+  Review.findAll({
+    include: [Product, User]
+  })
     .then(reviews => res.json(reviews))
     .catch(next);
 });
@@ -19,12 +21,13 @@ router.get('/', (req, res, next) => {
 router.get('/:id', (req, res, next) => {
   Review.findOne({
     where: { id: req.params.id },
+    include: [Product, User]
   })
     .then(review => res.json(review))
     .catch(next);
 });
 
-router.put('/:reviewId', isUser, (req, res, next) => {
+router.put('/:id', isUser, (req, res, next) => {
 	const {reviewId} = req.params;
 	Review.update(req.body, {where: {id: reviewId}, returning: true})
 		.then(data => res.status(200).json(data[1]))

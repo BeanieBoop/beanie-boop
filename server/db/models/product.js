@@ -21,10 +21,6 @@ const Product = db.define('product', {
     type: Sequelize.STRING,
     defaultValue: '/public/ty-logo.png'
   }
-}, {
-  defaultScope: {
-    include: [Category]
-  }
 })
 
 module.exports = Product
