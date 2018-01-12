@@ -1,6 +1,6 @@
 import React from 'react';
-import {MdPerson} from 'react-icons/lib/md';
-import {MdShoppingCart} from 'react-icons/lib/md';
+//import {MdPerson} from 'react-icons/lib/md';
+import {TiShoppingCart,TiUserOutline} from 'react-icons/lib/ti';
 import { Input } from 'semantic-ui-react'
 
 const NavBar = ({loggedIn}) => (
@@ -9,23 +9,24 @@ const NavBar = ({loggedIn}) => (
 		<div style={searchBar}>
 			<Input
 				fluid
-    	icon={{ name: 'search', circular: true, link: true }}
+			input={{style:{border: '2px solid #ccc'}}}
+    	icon={{ name: 'search', link: true, style: {color: "#ccc",fontSize: '20px' }}}
     	placeholder='Search...'
   	/>
 		</div>
 		<div style={cartContainer}>
-			<MdShoppingCart size={30} style={cartIcon}/>
+			<TiShoppingCart size={30} style={cartIcon}/>
 		</div>
-		{loggedIn ? <MdPerson size={30} style={profileIcon}/> : <p>login/sign up</p>}
+		{loggedIn ? <TiUserOutline size={30} style={profileIcon}/> : <p>login/sign up</p>}
 	</div>
 );
 
 const styles={
 	container: {
-		height: "50px",
+		height: "55px",
 		display: 'flex',
 		alignItems: 'center',
-		borderBottom: "1px solid #ccc"
+		borderBottom: "2px solid #ccc"
 	},
 	cartContainer: {
 		display: 'flex',
@@ -43,7 +44,7 @@ const styles={
 	logo: {
 		marginLeft: "30px",
 		marginRight: "30px",
-		height: "30px"
+		height: "40px"
 	},
 	searchBar:{
 		paddingRight: '100px',
