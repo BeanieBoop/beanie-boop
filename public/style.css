@@ -1,5 +1,5 @@
 body {
-  font-family: sans-serif;
+  font-family: 'Rubik', sans-serif !important;
   margin: 0px;
 }
 
@@ -19,4 +19,7 @@ nav a {
 form div {
   margin: 1em;
   display: inline-block;
+}
+.ui.input input {
+  font-family: 'Rubik', sans-serif !important;
 }
