@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import {withRouter, Link} from 'react-router-dom'
 import {logout} from '../store'
 
+import NavBar from './NavBar'
 /**
  * COMPONENT
  *  The Main component is our 'picture frame' - it displays the navbar and anything
@@ -12,9 +13,10 @@ import {logout} from '../store'
  */
 const Main = (props) => {
   const {children, handleClick, isLoggedIn} = props
-
+  console.log(isLoggedIn)
   return (
     <div>
+      <NavBar loggedIn={props.isLoggedIn}/>
       <h1>BOILERMAKER</h1>
       <nav>
         {
