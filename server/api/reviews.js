@@ -28,8 +28,8 @@ router.get('/:id', (req, res, next) => {
 });
 
 router.put('/:id', isUser, (req, res, next) => {
-	const {reviewId} = req.params;
-	Review.update(req.body, {where: {id: reviewId}, returning: true})
+	const { id } = req.params;
+	Review.update(req.body, {where: { id }, returning: true})
 		.then(data => res.status(200).json(data[1]))
 });
 
