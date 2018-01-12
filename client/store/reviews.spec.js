@@ -23,8 +23,11 @@ describe('thunk creators', () => {
   let store;
   let mockAxios;
 
-  beforeEach(() => {
+  before(() => {
     mockAxios = new MockAdapter(axios);
+  })
+
+  beforeEach(() => {
     store = mockStore();
   });
 

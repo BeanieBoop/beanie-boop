@@ -1,10 +1,10 @@
 'use strict';
 const router = require('express').Router();
-const { Order } = require('../db/models');
+const { Order, User } = require('../db/models');
 module.exports = router;
 
 function isUser(req, res, next){
-  if(req.user){
+  if (req.user){
     next()
   } else {
     next('error')
@@ -12,7 +12,9 @@ function isUser(req, res, next){
 }
 
 router.get('/', (req, res, next) => {
-  Order.findAll()
+  Order.findAll({
+    include: [User]
+  })
     .then(orders => res.json(orders))
     .catch(next);
 });
@@ -22,6 +24,7 @@ router.get('/:id', (req, res, next) => {
     where: {
       id: req.params.id,
     },
+    include: [User]
   })
     .then(order => res.json(order))
     .catch(next);
