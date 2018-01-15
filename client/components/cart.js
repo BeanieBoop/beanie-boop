@@ -1,4 +1,5 @@
 import React from 'react'
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import MdClose from 'react-icons/lib/md/close'
 import GoDiffAdded from 'react-icons/lib/go/diff-added'
@@ -12,7 +13,7 @@ import store from '../store' //TEMPORARY FOR DUMMY DATA
 
 const Cart = props => {
 
-  const { lineItems, products, handleSubmit, handleDelete } = props
+  const { lineItems, products, removeLineItemThunk } = props
 
   return products.length ?
   (
@@ -31,7 +32,7 @@ const Cart = props => {
           return (
             <tr key={productId} style={lineItemContainer}>
               <td style={deleteButtonContainer}>
-                <MdClose onClick={() => handleDelete(productId)} size={24} color={'#ccc'} />
+                <MdClose onClick={() => removeLineItemThunk(productId)} size={24} color={'#ccc'} />
               </td>
               <td style={pictureContainer}>
                 <img src={`${imgUrl}`} />
@@ -56,7 +57,7 @@ const Cart = props => {
         </thead>
       </table>
       <div style={checkoutButtonContainer}>
-        <button onClick={handleSubmit} className="positive ui button">Checkout</button>
+        <button className="positive ui button">Checkout</button>
       </div>
     </div>
 
@@ -66,17 +67,13 @@ const Cart = props => {
 
 const mapState = state => {
   return {
-    products: state.products,
+    products: state.products.products,
     lineItems: state.lineItems
   }
 }
 
 const mapDispatch = dispatch => {
-  return {
-    handleDelete: (productId) => {
-      dispatch(removeLineItemThunk(productId))
-    }
-  }
+  return bindActionCreators({ removeLineItemThunk }, dispatch)
 }
 
 export default connect(mapState, mapDispatch)(Cart)
