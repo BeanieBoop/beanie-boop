@@ -17,7 +17,7 @@ const NavBar = ({loggedIn}) => (
 		<div style={cartContainer}>
 			<TiShoppingCart size={30} style={cartIcon}/>
 		</div>
-		{loggedIn ? <TiUserOutline size={30} style={profileIcon}/> : <p>login/sign up</p>}
+		{loggedIn ? <TiUserOutline size={30} style={profileIcon}/> : <p>log in/sign up</p>}
 	</div>
 );
 
