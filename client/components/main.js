@@ -14,6 +14,7 @@ import NavBar from './NavBar'
  *  else common to our entire app. The 'picture' inside the frame is the space
  *  rendered out by the component's `children`.
  */
+
 const Main = ({children, handleClick, isLoggedIn, changeOrder, changeSearch,logout}) => {
   return (
     <div>
@@ -32,8 +33,6 @@ const mapState = (state) => {
     isLoggedIn: !!state.user.id
   }
 }
-
-
 
 function mapDispatch(dispatch){
   return bindActionCreators({logout,changeSearch,changeOrder},dispatch)

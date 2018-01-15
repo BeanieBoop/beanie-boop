@@ -3,12 +3,24 @@ import {connect} from 'react-redux'
 import {Route, Switch, Router} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
-import {Main, Login, Signup, UserHome} from './components'
-import {me, fetchProducts, fetchCategories} from './store'
 
-import ProductsContainer from './components/products/ProductsContainer'
-import ProductInfo from './components/ProductInfo'
-import Cart from './components/Cart'
+import {
+  Main,
+  Login,
+  Signup,
+  UserHome,
+  ProductsContainer,
+  ProductsCard,
+  ProductInfo,
+  Cart,
+} from './components'
+
+import {
+  me,
+  fetchProducts,
+  fetchCategories
+} from './store'
+
 
 /**
  * COMPONENT
@@ -28,14 +40,15 @@ class Routes extends Component {
             {/* Routes placed here are available to all visitors */}
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
-
+            <Route path="/cart" component={Cart} />
+            {
                 <Switch>
                   {/* Routes placed here are only available after logging in */}
                   <Route exact path="/products" component={ProductsContainer} />
                   <Route path="/products/:id" component={ProductInfo} />
-                  <Route path="/cart" component={Cart} />
                 </Switch>
-            
+            }
+
             {/* Displays our Login component as a fallback */}
             <Route component={Login} />
           </Switch>

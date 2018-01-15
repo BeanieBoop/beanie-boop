@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 //import {MdPerson} from 'react-icons/lib/md';
 import {TiShoppingCart,TiUserOutline} from 'react-icons/lib/ti';
-import { Input , Modal,Header} from 'semantic-ui-react'
+import { Input, Modal, Header} from 'semantic-ui-react'
 
 
 class NavBar extends Component {
@@ -47,8 +47,7 @@ class NavBar extends Component {
 
 }
 
-
-const styles={
+const styles = {
 	container: {
 		background: 'white',
 		height: "55px",
