@@ -1,14 +1,30 @@
 import React, { Component } from 'react';
 //import {MdPerson} from 'react-icons/lib/md';
 import {TiShoppingCart,TiUserOutline} from 'react-icons/lib/ti';
-import { Input, Modal, Header} from 'semantic-ui-react'
+import { Input, Icon, Modal, Header, Dropdown} from 'semantic-ui-react'
 
+import {Login} from './index'
+
+const options = [
+  { key: 1, text: 'Choice 1', value: 1 },
+  { key: 2, text: 'Choice 2', value: 2 },
+]
+const trigger = (
+  <span>
+    <TiUserOutline size={30} style={{
+			color: "rgba(0,0,0,.4)",
+			marginLeft: "30px",
+			marginRight: "-10px",
+		}}/>
+  </span>
+)
 
 class NavBar extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			modalOpen: false
+			modalOpen: false,
+			dropdown: false
 		};
 	}
 	render() {
@@ -30,17 +46,27 @@ class NavBar extends Component {
 				<div style={cartContainer}>
 					<TiShoppingCart size={30} style={cartIcon}/>
 				</div>
-				{loggedIn ? <TiUserOutline onClick={()=>logout()} size={30} style={profileIcon}/> : <p style={styles.loginText} onClick={()=>{this.setState({modalOpen: true})}}>Login / Sign Up</p>}
-				{/* <Modal open={this.state.modalOpen} onClose={()=>this.setState({modalOpen: false})}>
-			    <Modal.Header>Select a Photo</Modal.Header>
-			    <Modal.Content image>
+				{loggedIn ? (
+					<div style={{marginRight: "30px"}}>
+						<Dropdown className="profileDropdown left" floating trigger={trigger}>
+							<Dropdown.Menu>
+								<Dropdown.Item onClick={()=>logout()}>
+									<Icon name='log out' className='left floated' />
+        					Logout
+								</Dropdown.Item>
+							</Dropdown.Menu>
+						</Dropdown>
+					</div>
+				)
+				: <p style={styles.loginText} onClick={()=>{this.setState({modalOpen: true})}}>Login / Sign Up</p>}
+				<Modal size="small" open={this.state.modalOpen} onClose={()=>this.setState({modalOpen: false})}>
+			    <Modal.Header>Log In</Modal.Header>
+			    <Modal.Content>
 			      <Modal.Description>
-			        <Header>Default Profile Image</Header>
-			        <p>We've found the following gravatar image associated with your e-mail address.</p>
-			        <p>Is it okay to use this photo?</p>
+							<Login closeModal={()=>this.setState({modalOpen: false})} />
 			      </Modal.Description>
 			    </Modal.Content>
-			  </Modal> */}
+			  </Modal>
 			</div>
 		);
 	}
@@ -86,5 +112,6 @@ const styles = {
 		justifyContent: 'center'
 	}
 }
+//<TiUserOutline onClick={()=>logout()} size={30} style={profileIcon}/>
 const {container, logo, profileIcon, searchBar, cartContainer, cartIcon} = styles
 export default NavBar;

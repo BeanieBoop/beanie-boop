@@ -37,20 +37,11 @@ class Routes extends Component {
       <Router history={history}>
         <Main>
           <Switch>
-            {/* Routes placed here are available to all visitors */}
+            <Route exact path="/" component={ProductsContainer} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
             <Route path="/cart" component={Cart} />
-            {
-                <Switch>
-                  {/* Routes placed here are only available after logging in */}
-                  <Route exact path="/products" component={ProductsContainer} />
-                  <Route path="/products/:id" component={ProductInfo} />
-                </Switch>
-            }
-
-            {/* Displays our Login component as a fallback */}
-            <Route component={Login} />
+            <Route path="/products/:id" component={ProductInfo} />
           </Switch>
         </Main>
       </Router>
