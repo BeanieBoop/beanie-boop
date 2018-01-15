@@ -2,11 +2,11 @@ const { db, Category, Product, Order, LineItem, Review, User } = require('./db/m
 
 const categories = [
   {
-    name: 'Scary',
+    name: 'Superheroes',
     description: 'Sharp teeth, etc.'
   },
   {
-    name: 'Limited Edition',
+    name: 'Star Wars',
     description: 'Worth more than the average beanie baby.'
   },
   {
@@ -21,52 +21,52 @@ const categories = [
 
 const products = [{
   "id": 1,
-  "name": "Princes Diana Purple Bear",
+  "name": "C3PO",
   "description": "Felis concolor",
   "price": 7500000,
   "inventoryQuantity": 5,
-  "imgUrl": "https://robohash.org/totamvoluptasquibusdam.png?size=50x50&set=set1",
+  "imgUrl": "/pictures/c3po.jpg",
   "categoryId": 2
 }, {
   "id": 2,
-  "name": "Foxy the Fox",
+  "name": "Chewbacca",
   "description": "Dusicyon thous",
   "price": 7167,
   "inventoryQuantity": 6,
-  "imgUrl": "https://robohash.org/cumqueabipsam.png?size=50x50&set=set1",
-  "categoryId": 1
+  "imgUrl": "/pictures/chewbacca.jpg",
+  "categoryId": 2
 }, {
   "id": 3,
-  "name": "Common langur",
+  "name": "Ewok",
   "description": "Semnopithecus entellus",
   "price": 276,
   "inventoryQuantity": 65,
-  "imgUrl": "https://robohash.org/optioinducimus.png?size=50x50&set=set1",
-  "categoryId": 3
+  "imgUrl": "/pictures/wicket_top.jpg",
+  "categoryId": 2
 }, {
   "id": 4,
-  "name": "Steller sea lion",
+  "name": "Iron Man",
   "description": "Eumetopias jubatus",
   "price": 379,
   "inventoryQuantity": 99,
-  "imgUrl": "https://robohash.org/harumipsamnostrum.png?size=50x50&set=set1",
-  "categoryId": 4
+  "imgUrl": "/pictures/ironman.gif",
+  "categoryId": 1
 }, {
   "id": 5,
-  "name": "Grey fox",
+  "name": "Spiderman",
   "description": "Vulpes cinereoargenteus",
   "price": 507,
   "inventoryQuantity": 28,
-  "imgUrl": "https://robohash.org/velitquiaab.png?size=50x50&set=set1",
-  "categoryId": 2
+  "imgUrl": "/pictures/spiderman.gif",
+  "categoryId": 1
 }, {
   "id": 6,
-  "name": "Humpback Whale",
+  "name": "Captain America",
   "description": "Zalophus californicus",
   "price": 674,
   "inventoryQuantity": 88,
-  "imgUrl": "https://robohash.org/esseomnisitaque.png?size=50x50&set=set1",
-  "categoryId": 3
+  "imgUrl": "/pictures/captainAmerica.gif",
+  "categoryId": 1
 }, {
   "id": 7,
   "name": "Spotted hyena",
