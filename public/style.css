@@ -32,3 +32,7 @@ form div {
 .ui.dropdown .menu>.item {
   color: rgba(0, 0, 0, 0.4) !important
 }
+
+.ui.active.visible.floating.dropdown.profileDropdown .menu {
+    left: -40px;
+}

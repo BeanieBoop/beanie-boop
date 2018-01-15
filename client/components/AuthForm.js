@@ -2,16 +2,27 @@ import React from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {auth} from '../store'
-
+import { Form , Button} from 'semantic-ui-react'
 /**
  * COMPONENT
  */
 const AuthForm = (props) => {
-  const {name, displayName, handleSubmit, error} = props
+  const {name, displayName, handleSubmit, error,closeModal} = props
 
   return (
     <div>
-      <form onSubmit={handleSubmit} name={name}>
+      <Form name={name} style={{display: 'flex', flexDirection: 'column'}} onSubmit={(e)=>handleSubmit(e,closeModal)}>
+        <Form.Field>
+          <label>Email</label>
+          <input placeholder='Email' name="email" type="text"/>
+        </Form.Field>
+        <Form.Field>
+          <label>Password</label>
+          <input placeholder='Last Name' name="password" type="password"/>
+        </Form.Field>
+        <Button color='green' type='submit'>Submit</Button>
+      </Form>
+      {/* <form onSubmit={handleSubmit} name={name}>
         <div>
           <label htmlFor="email"><small>Email</small></label>
           <input name="email" type="text" />
@@ -24,7 +35,7 @@ const AuthForm = (props) => {
           <button type="submit">{displayName}</button>
         </div>
         {error && error.response && <div> {error.response.data} </div>}
-      </form>
+      </form> */}
       <a href="/auth/google">{displayName} with Google</a>
     </div>
   )
@@ -55,12 +66,13 @@ const mapSignup = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    handleSubmit (evt) {
+    handleSubmit (evt,test) {
       evt.preventDefault()
       const formName = evt.target.name
       const email = evt.target.email.value
       const password = evt.target.password.value
       dispatch(auth(email, password, formName))
+      test()
     }
   }
 }
