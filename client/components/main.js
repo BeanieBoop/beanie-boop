@@ -13,7 +13,7 @@ import NavBar from './NavBar'
  */
 const Main = (props) => {
   const {children, handleClick, isLoggedIn} = props
-  console.log(isLoggedIn)
+  console.log('isLoggedIn? ', isLoggedIn)
   return (
     <div>
       <NavBar loggedIn={props.isLoggedIn}/>

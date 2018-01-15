@@ -3,12 +3,21 @@ import {connect} from 'react-redux'
 import {Route, Switch, Router} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
-import {Main, Login, Signup, UserHome} from './components'
-import {me} from './store'
 
-import Products from './components/Products'
-import ProductInfo from './components/ProductInfo'
-import Cart from './components/Cart'
+import {
+  Main,
+  Login,
+  Signup,
+  UserHome,
+  Cart,
+  Products,
+  ProductInfo
+} from './components'
+
+import {
+  me,
+  fetchProducts
+} from './store'
 
 /**
  * COMPONENT
@@ -16,6 +25,8 @@ import Cart from './components/Cart'
 class Routes extends Component {
   componentDidMount () {
     this.props.loadInitialData()
+    this.props.fetchProducts()
+    console.log('dispatched fetchProducts from Routes component')
   }
 
   render () {
@@ -28,13 +39,13 @@ class Routes extends Component {
             {/* Routes placed here are available to all visitors */}
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
+            <Route path="/cart" component={Cart} />
             {
               isLoggedIn &&
                 <Switch>
                   {/* Routes placed here are only available after logging in */}
                   <Route exact path="/products" component={Products} />
                   <Route path="/products/:id" component={ProductInfo} />
-                  <Route path="/cart" component={Cart} />
                 </Switch>
             }
             {/* Displays our Login component as a fallback */}
@@ -61,6 +72,9 @@ const mapDispatch = (dispatch) => {
   return {
     loadInitialData () {
       dispatch(me())
+    },
+    fetchProducts() {
+      dispatch(fetchProducts())
     }
   }
 }
