@@ -9,15 +9,18 @@ import {
   Login,
   Signup,
   UserHome,
+  ProductsContainer,
+  ProductsCard,
+  ProductInfo,
   Cart,
-  Products,
-  ProductInfo
 } from './components'
 
 import {
   me,
-  fetchProducts
+  fetchProducts,
+  fetchCategories
 } from './store'
+
 
 /**
  * COMPONENT
@@ -25,8 +28,6 @@ import {
 class Routes extends Component {
   componentDidMount () {
     this.props.loadInitialData()
-    this.props.fetchProducts()
-    console.log('dispatched fetchProducts from Routes component')
   }
 
   render () {
@@ -41,13 +42,13 @@ class Routes extends Component {
             <Route path="/signup" component={Signup} />
             <Route path="/cart" component={Cart} />
             {
-              isLoggedIn &&
                 <Switch>
                   {/* Routes placed here are only available after logging in */}
-                  <Route exact path="/products" component={Products} />
+                  <Route exact path="/products" component={ProductsContainer} />
                   <Route path="/products/:id" component={ProductInfo} />
                 </Switch>
             }
+
             {/* Displays our Login component as a fallback */}
             <Route component={Login} />
           </Switch>
@@ -64,6 +65,7 @@ const mapState = (state) => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
+    products: state.products,
     isLoggedIn: !!state.user.id
   }
 }
@@ -72,9 +74,8 @@ const mapDispatch = (dispatch) => {
   return {
     loadInitialData () {
       dispatch(me())
-    },
-    fetchProducts() {
       dispatch(fetchProducts())
+      dispatch(fetchCategories())
     }
   }
 }

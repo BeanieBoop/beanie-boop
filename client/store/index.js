@@ -10,7 +10,6 @@ import products from './products'
 import reviews from './reviews'
 import user from './user'
 
-
 const reducer = combineReducers({
   categories,
   lineItems,
@@ -34,4 +33,3 @@ export * from './orders'
 export * from './products'
 export * from './reviews'
 export * from './user'
-
