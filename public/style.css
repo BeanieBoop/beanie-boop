@@ -1,6 +1,7 @@
 body {
   font-family: 'Rubik', sans-serif !important;
   margin: 0px;
+  background-color: #F0F0F0;
 }
 
 a {
@@ -22,4 +23,12 @@ form div {
 }
 .ui.input input {
   font-family: 'Rubik', sans-serif !important;
+}
+
+.ui.search.dropdown {
+  border: 2px solid #ccc !important
+}
+
+.ui.dropdown .menu>.item {
+  color: rgba(0, 0, 0, 0.4) !important
 }

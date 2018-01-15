@@ -5,7 +5,10 @@ import {
   GET_PRODUCTS,
   CREATE_PRODUCT,
   EDIT_PRODUCT,
-  DELETE_PRODUCT
+  DELETE_PRODUCT,
+  CHANGE_CATEGORY,
+  CHANGE_SEARCH,
+  CHANGE_ORDER
 } from './products'
 
 // import action creators
@@ -13,7 +16,10 @@ import {
   getProducts,
   createProduct,
   editProduct,
-  deleteProduct
+  deleteProduct,
+  changeCategory,
+  changeSearch,
+  changeOrder
 } from './products'
 
 // import thunk creators
@@ -155,6 +161,28 @@ describe('thunk creators', () => {
           expect(actions[0].type).to.be.equal(DELETE_PRODUCT)
           expect(actions[0].productId).to.be.deep.equal(1)
         })
+    })
+
+  })
+  describe('filtering Product', () => {
+
+    it('dispatches the CHANGE_CATEGORY action', () => {
+      store.dispatch(changeCategory("test category"))
+      const actions = store.getActions()
+      expect(actions[0].type).to.be.equal(CHANGE_CATEGORY)
+      expect(actions[0].category).to.be.deep.equal("test category")
+    })
+    it('dispatches the CHANGE_SEARCH action', () => {
+      store.dispatch(changeSearch("test search"))
+      const actions = store.getActions()
+      expect(actions[0].type).to.be.equal(CHANGE_SEARCH)
+      expect(actions[0].search).to.be.deep.equal("test search")
+    })
+    it('dispatches the CHANGE_ORDER action', () => {
+      store.dispatch(changeOrder("test order"))
+      const actions = store.getActions()
+      expect(actions[0].type).to.be.equal(CHANGE_ORDER)
+      expect(actions[0].order).to.be.deep.equal("test order")
     })
 
   })
