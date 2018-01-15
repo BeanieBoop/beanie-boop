@@ -6,7 +6,7 @@ module.exports = router
 
 router.post('/', (req, res, next) => {
   const {orderId} = req.body
-	if(orderId){
+	if (orderId){
 		LineItem.create(req.body)
 		.then(lineItem => res.status(201).json(lineItem))
     .catch(next)

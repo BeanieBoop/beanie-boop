@@ -5,9 +5,10 @@ import history from '../history'
  * ACTION TYPES
  */
 
-export const ADD_LINE_ITEM_LS = 'ADD_LINE_ITEM_LS' // add new line item to localStorage
-export const EDIT_LINE_ITEM_LS = 'EDIT_LINE_ITEM_LS' // edit line item in localStorage, i.e., quantity
-export const REMOVE_LINE_ITEM_LS = 'REMOVE_LINE_ITEM_LS' // remove line item from localStorage
+export const ADD_LINE_ITEM = 'ADD_LINE_ITEM' // add new line item to localStorage
+export const EDIT_LINE_ITEM = 'EDIT_LINE_ITEM' // edit line item in localStorage, i.e., quantity
+export const REMOVE_LINE_ITEM = 'REMOVE_LINE_ITEM' // remove line item from localStorage
+export const CLEAR_LINE_ITEMS = 'CLEAR_LINE_ITEMS' // clear all line items from store once order is submitted
 
 export const CREATE_LINE_ITEM_DB = 'CREATE_LINE_ITEM_DB' // POST to database upon submission of order
 
@@ -16,38 +17,27 @@ export const CREATE_LINE_ITEM_DB = 'CREATE_LINE_ITEM_DB' // POST to database upo
  * ACTION CREATORS
  */
 
-export const addLineItemLS = lineItem => ({type: ADD_LINE_ITEM_LS, lineItem})
-export const editLineItemLS = (productId, newQuantity) => ({type: EDIT_LINE_ITEM_LS, productId, newQuantity})
-export const removeLineItemLS = productId => ({type: REMOVE_LINE_ITEM_LS, productId})
-
-export const createLineItemDB = lineItem => ({type: CREATE_LINE_ITEM_DB, lineItem})
+export const addLineItem = lineItem => ({type: ADD_LINE_ITEM, lineItem})
+export const editLineItem = (productId, newQuantity) => ({type: EDIT_LINE_ITEM, productId, newQuantity})
+export const removeLineItem = productId => ({type: REMOVE_LINE_ITEM, productId})
+export const clearLineItems = () => ({type: CLEAR_LINE_ITEMS})
 
 
 /**
  * THUNK CREATORS
  */
 
-export const removeLineItemThunk = productId => {
-  console.log('productId', productId)
-  return dispatch => {
-    const lineItemsLS = JSON.parse(localStorage.getItem('lineItems')) // get lineItems from localStorage
-    const lineItemToRemove = lineItemsLS.find(lineItem => lineItem.productId === productId)
-    const indexToRemove = lineItemsLS.indexOf(lineItemToRemove)
-    lineItemsLS.splice(indexToRemove, 1) // remove lineItem
-    localStorage.setItem('lineItems', JSON.stringify(lineItemsLS)) // set localStorage to reflect lineItem removal
-    const action = removeLineItemLS(productId)
-    return dispatch(action) // set state to reflect changes
-  }
+export const syncLocalStorage = state => {
+  localStorage.setItem('lineItems', state.lineItems)
 }
-
 
 export const postLineItem = (formData) =>
   dispatch =>
     axios.post('/api/lineItems', formData)
       .then(res => res.data)
       .then(lineItem => {
-        const action = createLineItemDB(lineItem);
-        dispatch(action);
+        // const action = createLineItem(lineItem);
+        // dispatch(action);
       })
       .catch(err => console.log(err))
 
@@ -59,10 +49,10 @@ export const postLineItem = (formData) =>
 export default function (state = [], action) {
   switch (action.type) {
 
-    case ADD_LINE_ITEM_LS:
+    case ADD_LINE_ITEM:
       return [...state, action.lineItem]
 
-    case EDIT_LINE_ITEM_LS: {
+    case EDIT_LINE_ITEM: {
       let newState = [...state]
       const lineItemToEdit = newState.find(lineItem => lineItem.productId === action.productId)
       const indexToEdit = state.indexOf(lineItemToEdit)
@@ -71,7 +61,7 @@ export default function (state = [], action) {
       return newState
     }
 
-    case REMOVE_LINE_ITEM_LS: {
+    case REMOVE_LINE_ITEM: {
       let newState = [...state]
       const lineItemToRemove = newState.find(lineItem => lineItem.productId === action.productId)
       const indexToRemove = state.indexOf(lineItemToRemove)
@@ -79,8 +69,8 @@ export default function (state = [], action) {
       return newState
     }
 
-    case CREATE_LINE_ITEM_DB:
-      return [...state, action.lineItem]
+    case CLEAR_LINE_ITEMS:
+      return []
 
     default:
       return state
