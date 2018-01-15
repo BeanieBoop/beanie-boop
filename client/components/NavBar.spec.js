@@ -10,11 +10,11 @@ describe('NavBar', () =>{
 	})
 	it('component', () => {
 		expect(navbar.find('img').prop('src')).to.be.equal('ty-logo.png')
-		expect(navbar.find('MdShoppingCart').length).to.be.equal(1)
+		expect(navbar.find('TiShoppingCart').length).to.be.equal(1)
 	})
 	describe('Logged-In', () =>{
 		it('person Icon', () => {
-			expect(navbar.find('MdPerson').length).to.be.equal(1)
+			expect(navbar.find('TiUserOutline').length).to.be.equal(1)
 		})
 	})
 	describe('Logged-Out', () =>{
@@ -22,7 +22,7 @@ describe('NavBar', () =>{
 			navbar = shallow(<NavBar loggedIn={false}/>)
 		})
 		it('person Icon', () => {
-			expect(navbar.find('MdPerson').length).to.be.equal(0)
+			expect(navbar.find('TiUserOutline').length).to.be.equal(0)
 		})
 	})
 })

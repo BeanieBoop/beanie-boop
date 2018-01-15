@@ -1,28 +1,56 @@
-import React from 'react';
+import React, { Component } from 'react';
 //import {MdPerson} from 'react-icons/lib/md';
 import {TiShoppingCart,TiUserOutline} from 'react-icons/lib/ti';
-import { Input } from 'semantic-ui-react'
+import { Input , Modal,Header} from 'semantic-ui-react'
 
-const NavBar = ({loggedIn}) => (
-	<div style={container}>
-		<img style={logo} src="ty-logo.png"></img>
-		<div style={searchBar}>
-			<Input
-				fluid
-			input={{style:{border: '2px solid #ccc'}}}
-    	icon={{ name: 'search', link: true, style: {color: "#ccc",fontSize: '20px' }}}
-    	placeholder='Search...'
-  	/>
-		</div>
-		<div style={cartContainer}>
-			<TiShoppingCart size={30} style={cartIcon}/>
-		</div>
-		{loggedIn ? <TiUserOutline size={30} style={profileIcon}/> : <p>login/sign up</p>}
-	</div>
-);
+
+class NavBar extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			modalOpen: false
+		};
+	}
+	render() {
+		const {loggedIn,logout, changeSearch} = this.props
+		return (
+			<div style={container}>
+				<img style={logo} src="ty-logo.png"></img>
+				<div style={searchBar}>
+					<Input
+					fluid
+					input={{style:{border: '2px solid #ccc'}}}
+		    	icon={{ name: 'search', link: true, style: {color: "#ccc",fontSize: '20px' }}}
+		    	placeholder='Search...'
+					onChange={(event, data)=> {
+						changeSearch(data.value)
+					}}
+		  	/>
+				</div>
+				<div style={cartContainer}>
+					<TiShoppingCart size={30} style={cartIcon}/>
+				</div>
+				{loggedIn ? <TiUserOutline onClick={()=>logout()} size={30} style={profileIcon}/> : <p style={styles.loginText} onClick={()=>{this.setState({modalOpen: true})}}>Login / Sign Up</p>}
+				{/* <Modal open={this.state.modalOpen} onClose={()=>this.setState({modalOpen: false})}>
+			    <Modal.Header>Select a Photo</Modal.Header>
+			    <Modal.Content image>
+			      <Modal.Description>
+			        <Header>Default Profile Image</Header>
+			        <p>We've found the following gravatar image associated with your e-mail address.</p>
+			        <p>Is it okay to use this photo?</p>
+			      </Modal.Description>
+			    </Modal.Content>
+			  </Modal> */}
+			</div>
+		);
+	}
+
+}
+
 
 const styles={
 	container: {
+		background: 'white',
 		height: "55px",
 		display: 'flex',
 		alignItems: 'center',
@@ -32,12 +60,18 @@ const styles={
 		display: 'flex',
 		alignItems: 'center'
 	},
+	loginText: {
+		color: "rgba(0,0,0,.4)",
+		fontSize: '16px',
+		marginLeft: "10px",
+		marginRight: "10px",
+	},
 	cartIcon: {
-		color: '#ccc',
+		color: "rgba(0,0,0,.4)",
 		marginLeft: "10px"
 	},
 	profileIcon: {
-		color: '#ccc',
+		color: "rgba(0,0,0,.4)",
 		marginLeft: "30px",
 		marginRight: "30px",
 	},
