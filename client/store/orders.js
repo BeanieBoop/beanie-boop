@@ -37,7 +37,6 @@ export const postOrder = (formData) =>
       .then(order => {
         const action = createOrder(order);
         dispatch(action);
-        history.push(`/orders/${order.id}`)  // redirects to newly-CREATED order page
       })
       .catch(err => console.log(err))
 

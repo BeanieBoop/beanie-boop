@@ -1,19 +1,21 @@
 import React from 'react'
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import MdClose from 'react-icons/lib/md/close'
 import GoDiffAdded from 'react-icons/lib/go/diff-added'
 import GoDiffRemoved from 'react-icons/lib/go/diff-removed'
-import { addLineItemLS, editLineItemLS, removeLineItemThunk, postOrder } from '../store'
-// import { withRouter } from 'react-router-dom'
-// import { currentId } from 'async_hooks';
+import axios from 'axios'
 
-import store from '../store' //TEMPORARY FOR DUMMY DATA
-
+import store, {
+  addLineItem,
+  editLineItem,
+  removeLineItem,
+  clearLineItems,
+  syncLocalStorage,
+  postLineItem } from '../store'
 
 const Cart = props => {
 
-  const { lineItems, products, removeLineItemThunk } = props
+  const { lineItems, products, handleEditQuantity, handleRemove } = props
 
   return products.length ?
   (
@@ -32,7 +34,7 @@ const Cart = props => {
           return (
             <tr key={productId} style={lineItemContainer}>
               <td style={deleteButtonContainer}>
-                <MdClose onClick={() => removeLineItemThunk(productId)} size={24} color={'#ccc'} />
+                <MdClose onClick={() => handleRemove(productId)} size={24} color={'#ccc'} />
               </td>
               <td style={pictureContainer}>
                 <img src={`${imgUrl}`} />
@@ -45,9 +47,13 @@ const Cart = props => {
               </td>
               <td style={quantityContainer}>
                 <div style={quantityDiv}>
-                  <GoDiffRemoved size={20} color={'#ccc'} />
-                  <div>{quantity}</div>
-                  <GoDiffAdded size={20} color={'#ccc'} />
+                  <GoDiffRemoved
+                    onClick={() => handleEditQuantity(productId, quantity - 1)}
+                    size={20} color={'#ccc'} />
+                <div>{quantity}</div>
+                  <GoDiffAdded
+                    onClick={() => handleEditQuantity(productId, quantity + 1)}
+                    size={20} color={'#ccc'} />
                 </div>
               </td>
             </tr>
@@ -73,7 +79,33 @@ const mapState = state => {
 }
 
 const mapDispatch = dispatch => {
-  return bindActionCreators({ removeLineItemThunk }, dispatch)
+  return {
+    handleEditQuantity: (productId, newQuantity) => {
+      if (newQuantity >= 0) {
+        dispatch(editLineItem(productId, newQuantity))
+        const state = store.getState()
+        syncLocalStorage(state)
+      }
+    },
+    handleRemove: productId => {
+      if (confirm(`Click OK to remove item(s) from cart`)) {
+        dispatch(removeLineItem(productId))
+        const state = store.getState()
+        syncLocalStorage(state)
+      }
+    },
+    // handleSubmit: (lineItems) => {
+    //   axios.post('/api/orders', { status: 'in-process' })
+    //     .then(res => res.data)
+    //     .then(order => {
+    //       dispatch(createOrder(order));
+    //       lineItems.map(lineItem => {
+    //         postLineItem(lineItem)
+    //       })
+    //     })
+    //     .catch(err => console.log(err))
+    // }
+  }
 }
 
 export default connect(mapState, mapDispatch)(Cart)
@@ -94,7 +126,7 @@ const dummyLineItems = [
 ]
 
 localStorage.setItem('lineItems', JSON.stringify(dummyLineItems)) // set dummy data to localStorage
-dummyLineItems.map(lineItem => store.dispatch(addLineItemLS(lineItem)) ) // add dummy data to state
+dummyLineItems.map(lineItem => store.dispatch(addLineItem(lineItem)) ) // add dummy data to state
 
 // ----------CSS----------
 
@@ -112,6 +144,7 @@ const styles = {
     borderLeft: '2px solid #ccc',
     borderRight: '2px solid #ccc',
     borderTop: '2px solid #ccc',
+    background: 'white'
   },
 	cartTable: {
     width: '100%',
@@ -120,7 +153,8 @@ const styles = {
     border: '2px solid #ccc',
   },
   lineItemContainer: {
-    borderTop: '2px solid #ccc'
+    borderTop: '2px solid #ccc',
+    background: 'white'
   },
   deleteButtonContainer: {
     height: '120px',
