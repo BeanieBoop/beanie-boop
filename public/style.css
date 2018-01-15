@@ -36,3 +36,8 @@ form div {
 .ui.active.visible.floating.dropdown.profileDropdown .menu {
     left: -40px;
 }
+.ui.right.overlay.sidebar {
+  background: white;
+  width: 300px;
+  border-left: '2px solid #ccc';
+}
