@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {withRouter, Link} from 'react-router-dom'
 import {logout} from '../store'
 import {bindActionCreators} from 'redux';
-
+import { Sidebar,Icon, Segment,Menu} from 'semantic-ui-react';
 import {changeSearch, changeOrder} from '../store/products'
 
 import NavBar from './NavBar'
@@ -15,15 +15,59 @@ import NavBar from './NavBar'
  *  rendered out by the component's `children`.
  */
 
-const Main = ({children, handleClick, isLoggedIn, changeOrder, changeSearch,logout}) => {
-  return (
-    <div>
-      <NavBar logout={logout} changeOrder={changeOrder} changeSearch={changeSearch} loggedIn={isLoggedIn}/>
 
-      {children}
-    </div>
-  )
+class Main extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      visible: false
+    };
+    this.handleSidebar = this.handleSidebar.bind(this)
+  }
+  handleSidebar(){
+    this.setState({visible: !this.state.visible})
+  }
+  render() {
+    const {children, handleClick, isLoggedIn, changeOrder, changeSearch,logout} = this.props
+    return (
+      <div>
+        <NavBar logout={logout} toggleCart={this.handleSidebar} changeOrder={changeOrder} changeSearch={changeSearch} loggedIn={isLoggedIn}/>
+        <Sidebar.Pushable as={"div"}>
+            <Sidebar
+              as={Segment} className="sideBarSegment" animation='overlay' width='wide' direction='right' visible={this.state.visible} icon='labeled' vertical
+            >
+              hdjgjkfhjkg
+            </Sidebar>
+            <Sidebar.Pusher>
+              {children}
+            </Sidebar.Pusher>
+          </Sidebar.Pushable>
+
+      </div>
+    );
+  }
+
 }
+
+
+// const Main = ({children, handleClick, isLoggedIn, changeOrder, changeSearch,logout}) => {
+//   return (
+//     <div>
+//       <NavBar logout={logout} changeOrder={changeOrder} changeSearch={changeSearch} loggedIn={isLoggedIn}/>
+//       <Sidebar.Pushable as={"div"}>
+//           <Sidebar
+//             as={Segment} className="sideBarSegment" animation='overlay' width='wide' direction='right' visible={false} icon='labeled' vertical
+//           >
+//             Cat container
+//           </Sidebar>
+//           <Sidebar.Pusher>
+//             {children}
+//           </Sidebar.Pusher>
+//         </Sidebar.Pushable>
+//
+//     </div>
+//   )
+// }
 
 /**
  * CONTAINER

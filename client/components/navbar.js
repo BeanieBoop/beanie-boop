@@ -28,7 +28,7 @@ class NavBar extends Component {
 		};
 	}
 	render() {
-		const {loggedIn,logout, changeSearch} = this.props
+		const {loggedIn,logout, changeSearch, toggleCart} = this.props
 		return (
 			<div style={container}>
 				<img style={logo} src="ty-logo.png"></img>
@@ -44,7 +44,7 @@ class NavBar extends Component {
 		  	/>
 				</div>
 				<div style={cartContainer}>
-					<TiShoppingCart size={30} style={cartIcon}/>
+					<TiShoppingCart size={30} onClick={toggleCart} style={cartIcon}/>
 				</div>
 				{loggedIn ? (
 					<div style={{marginRight: "30px"}}>
