@@ -10,8 +10,6 @@ export const EDIT_LINE_ITEM = 'EDIT_LINE_ITEM' // edit line item in localStorage
 export const REMOVE_LINE_ITEM = 'REMOVE_LINE_ITEM' // remove line item from localStorage
 export const CLEAR_LINE_ITEMS = 'CLEAR_LINE_ITEMS' // clear all line items from store once order is submitted
 
-export const CREATE_LINE_ITEM_DB = 'CREATE_LINE_ITEM_DB' // POST to database upon submission of order
-
 
 /**
  * ACTION CREATORS
@@ -28,25 +26,17 @@ export const clearLineItems = () => ({type: CLEAR_LINE_ITEMS})
  */
 
 export const syncLocalStorage = state => {
-  localStorage.setItem('lineItems', state.lineItems)
+  const lineItems = JSON.stringify(state.lineItems)
+  localStorage.setItem('lineItems', lineItems)
 }
-
-export const postLineItem = (formData) =>
-  dispatch =>
-    axios.post('/api/lineItems', formData)
-      .then(res => res.data)
-      .then(lineItem => {
-        // const action = createLineItem(lineItem);
-        // dispatch(action);
-      })
-      .catch(err => console.log(err))
-
-
 
 /**
  * REDUCER
  */
-export default function (state = [], action) {
+
+const initialState = JSON.parse(localStorage.getItem('lineItems')) || []
+
+export default function (state = initialState, action) {
   switch (action.type) {
 
     case ADD_LINE_ITEM:

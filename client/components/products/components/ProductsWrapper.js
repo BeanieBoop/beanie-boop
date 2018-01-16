@@ -4,11 +4,12 @@ import FilterNav from './FilterNav'
 import ProductsCard from './ProductsCard'
 
 
-const ProductsWrapper = ({products,category, categories,location, changeCategory,changeOrder}) => (
+const ProductsWrapper = ({products,category, categories,location, changeCategory,changeOrder, lineItems, addLineItem, editLineItem }) => (
 	<div>
 		<FilterNav category={category} changeCategory={changeCategory} changeOrder={changeOrder} categories={categories}/>
 		<div style={styles.cards}>
-			{products.map(product => <ProductsCard key={product.id} product={product}/>)}
+			{products.map(product =>
+      <ProductsCard key={product.id} product={product} lineItems={lineItems} addLineItem={addLineItem} editLineItem={editLineItem} />)}
 		</div>
 	</div>
 );
