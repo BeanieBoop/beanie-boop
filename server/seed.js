@@ -3,21 +3,22 @@ const { db, Category, Product, Order, LineItem, Review, User } = require('./db/m
 const categories = [
   {
     name: 'Superheroes',
-    description: 'Sharp teeth, etc.'
+    description: 'Sharp teeth, etc.',
   },
   {
     name: 'Star Wars',
-    description: 'Worth more than the average beanie baby.'
+    description: 'Worth more than the average beanie baby.',
   },
   {
-    name: 'Farm Animals',
-    description: 'Find them on a farm!'
+    name: 'Frozen',
+    description: 'Beanie babies from Frozen™!',
   },
   {
     name: 'Underwater',
-    description: 'Underwater beanie babies!'
-  }
+    description: 'Underwater beanie babies!',
+  },
 ];
+
 
 const products = [{
   "name": "C3PO",
@@ -218,81 +219,107 @@ const reviews = [{
   "productId": 10
 }]
 
-const users = [{
-  "id": 1,
-  "email": "schamp0@wired.com",
-  "password": "password",
-  "isAdmin": "true"
-}, {
-  "id": 2,
-  "email": "cglantz1@ameblo.jp",
-  "password": "password"
-}, {
-  "id": 3,
-  "email": "mcranmer2@nifty.com",
-  "password": "password"
-}, {
-  "id": 4,
-  "email": "enitti3@printfriendly.com",
-  "password": "password"
-}, {
-  "id": 5,
-  "email": "jhuggen4@ucoz.com",
-  "password": "password"
-}, {
-  "id": 6,
-  "email": "srousel5@youtu.be",
-  "password": "password"
-}, {
-  "id": 7,
-  "email": "lgoldney6@bbc.co.uk",
-  "password": "password"
-}, {
-  "id": 8,
-  "email": "rmylchreest7@jiathis.com",
-  "password": "password"
-}, {
-  "id": 9,
-  "email": "amorford8@indiegogo.com",
-  "password": "password"
-}, {
-  "id": 10,
-  "email": "snassie9@walmart.com",
-  "password": "password"
-}]
 
-db.sync({force: true})
+
+const users = [
+  {
+    id: 1,
+    email: 'schamp0@wired.com',
+    password: 'password',
+    isAdmin: 'true',
+  },
+  {
+    id: 2,
+    email: 'cglantz1@ameblo.jp',
+    password: 'password',
+  },
+  {
+    id: 3,
+    email: 'mcranmer2@nifty.com',
+    password: 'password',
+  },
+  {
+    id: 4,
+    email: 'enitti3@printfriendly.com',
+    password: 'password',
+  },
+  {
+    id: 5,
+    email: 'jhuggen4@ucoz.com',
+    password: 'password',
+  },
+  {
+    id: 6,
+    email: 'srousel5@youtu.be',
+    password: 'password',
+  },
+  {
+    id: 7,
+    email: 'lgoldney6@bbc.co.uk',
+    password: 'password',
+  },
+  {
+    id: 8,
+    email: 'rmylchreest7@jiathis.com',
+    password: 'password',
+  },
+  {
+    id: 9,
+    email: 'amorford8@indiegogo.com',
+    password: 'password',
+  },
+  {
+    id: 10,
+    email: 'snassie9@walmart.com',
+    password: 'password',
+  },
+];
+
+db
+  .sync({ force: true })
   .then(() => {
-    return Promise.all(categories.map(category => {
-      return Category.create(category)
-    }))
+    return Promise.all(
+      categories.map(category => {
+        return Category.create(category);
+      })
+    );
   })
   .then(() => {
-    return Promise.all(products.map(product => {
-      return Product.create(product)
-    }))
+    return Promise.all(
+      products.map(product => {
+        return Product.create(product);
+      })
+    );
   })
   .then(() => {
-    return Promise.all(users.map(user => {
-      return User.create(user)
-    }))
+    return Promise.all(
+      users.map(user => {
+        return User.create(user);
+      })
+    );
   })
   .then(() => {
-    return Promise.all(orders.map(order => {
-      return Order.create(order)
-    }))
+    return Promise.all(
+      orders.map(order => {
+        return Order.create(order);
+      })
+    );
   })
   .then(() => {
-    return Promise.all(lineItems.map(lineItem => {
-      return LineItem.create(lineItem)
-    }))
+    return Promise.all(
+      lineItems.map(lineItem => {
+        return LineItem.create(lineItem);
+      })
+    );
   })
   .then(() => {
-    return Promise.all(reviews.map(review => {
-      return Review.create(review)
-    }))
+    return Promise.all(
+      reviews.map(review => {
+        return Review.create(review);
+      })
+    );
   })
   .then(() => {
-    console.log('success!!')
+    console.log('success!!');
   })
-  .catch((err) => console.error(err))
+  .catch(err => console.error(err));
