@@ -15,8 +15,7 @@ const Review = db.define('review', {
   reviewText: {
     type: Sequelize.TEXT,
     validate: {
-      len: [10, 250],
-      message: 'Length must be between 10 and 250 characters long.'
+      len: [10, 250]
     }
   }
 })

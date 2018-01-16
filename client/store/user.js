@@ -59,7 +59,6 @@ export const logout = () =>
 export default function (state = defaultUser, action) {
   switch (action.type) {
     case GET_USER:
-    console.log('reducer',action)
       return action.user
     case REMOVE_USER:
       return defaultUser
