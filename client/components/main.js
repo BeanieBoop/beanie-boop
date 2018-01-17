@@ -8,6 +8,7 @@ import { Sidebar,Icon, Segment,Menu} from 'semantic-ui-react';
 import {changeSearch, changeOrder} from '../store/products'
 
 import NavBar from './NavBar'
+import CartBarContainer from './CartBarContainer'
 /**
  * COMPONENT
  *  The Main component is our 'picture frame' - it displays the navbar and anything
@@ -36,7 +37,7 @@ class Main extends Component {
             <Sidebar
               as={Segment} className="sideBarSegment" animation='overlay' width='wide' direction='right' visible={this.state.visible} icon='labeled' vertical
             >
-              hdjgjkfhjkg
+              <CartBarContainer />
             </Sidebar>
             <Sidebar.Pusher>
               {children}

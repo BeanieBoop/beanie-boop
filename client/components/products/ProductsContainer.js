@@ -2,6 +2,7 @@ import React from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux'
 import {changeCategory,changeOrder} from '../../store/products'
+import { addLineItem, editLineItem } from '../../store'
 
 import ProductsWrapper from './components/ProductsWrapper'
 
@@ -67,12 +68,13 @@ function mapState(state,props){
   return {
     products: orderProducts(filterProducts(state.products.products, state.products.category,state.products.search,props),state.products.order),
 		category: state.products.category,
-		categories: state.categories
+    categories: state.categories,
+    lineItems: state.lineItems
   }
 }
 
 function mapDispatch(dispatch){
-  return bindActionCreators({changeCategory,changeOrder},dispatch)
+  return bindActionCreators({changeCategory,changeOrder, addLineItem, editLineItem},dispatch)
 }
 
 export default connect(mapState,mapDispatch)(Products)
