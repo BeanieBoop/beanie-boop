@@ -34,6 +34,7 @@ router.get('/:id', (req, res, next) => {
 
 router.put('/:id', isAdmin, (req, res, next) => {
   const { id } = req.params;
+  console.log("ghggjhgjhgjh",req.body)
   Product.update(req.body, { where: { id: id }, returning: true }).then(data => res.status(200).json(data[1]));
 });
 

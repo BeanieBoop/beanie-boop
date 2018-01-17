@@ -1,6 +1,8 @@
 'use strict';
 const router = require('express').Router();
+const { Order, User, LineItem} = require('../db/models');
 const { Order, User, LineItem } = require('../db/models');
+
 module.exports = router;
 
 function isUser(req, res, next){
@@ -13,7 +15,7 @@ function isUser(req, res, next){
 
 router.get('/', (req, res, next) => {
   Order.findAll({
-    include: [User]
+    include: [User, LineItem]
   })
     .then(orders => res.json(orders))
     .catch(next);
@@ -39,7 +41,6 @@ router.put('/:id', (req, res, next) => {
 // {status: 'inprogress', lineItems: [}
 router.post('/', (req, res, next) => {
   const {status, lineItems, userId} = req.body
-
   Order.create({status})
     .then(order => {
       Promise.all(lineItems.map(lineItem => {

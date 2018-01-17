@@ -2,11 +2,11 @@ import React from 'react';
 import {withRouter,NavLink} from 'react-router-dom'
 import {TiArrowUnsorted} from 'react-icons/lib/ti';
 import {Icon,Input,Dropdown} from 'semantic-ui-react';
-const FilterNav = ({categories, category ,changeCategory,changeOrder}) => (
+const FilterNav = ({match,categories, category ,changeCategory,changeOrder}) => (
 	<div style={container}>
 		<div style={categoryContainer}>
-			<div onClick={()=>changeCategory('All')} style={category === 'All' ? activeTab : catTab} >All</div>
-			{categories.map(cat => <div key={cat.id} onClick={()=>changeCategory(cat.name)} style={category === cat.name ? activeTab : catTab} to={`category/${cat.name}`}>{cat.name}</div>)}
+			<NavLink to='/' style={match.params.catId ? catTab : activeTab} >All</NavLink>
+			{categories.map(cat => <NavLink key={cat.id}  style={catTab} activeStyle={activeTab}  to={`/category/${cat.id}`}>{cat.name}</NavLink>)}
 		</div>
 		<div style={sort}>
 			<Icon style={{color: "rgba(0,0,0,.4)"}} name="sliders"/>

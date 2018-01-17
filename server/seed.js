@@ -220,60 +220,60 @@ const reviews = [{
 }]
 
 
+const users = [{
+  
+  "name": "Harry Miles",
+  "email": "schamp0@wired.com",
+  "password": "password",
+  "isAdmin": "true"
+}, {
+  
+  "name": "David Jones",
+  "email": "cglantz1@ameblo.jp",
+  "password": "password"
+}, {
+  
+  "name": "Dawn Harris",
+  "email": "mcranmer2@nifty.com",
+  "password": "password"
+}, {
+  
+  "name": "Mary Booth",
+  "email": "enitti3@printfriendly.com",
+  "password": "password"
+}, {
+  
+  "name": "Steve Miller",
+  "email": "jhuggen4@ucoz.com",
+  "password": "password"
+}, {
+  
+  "name": "Roger Riley",
+  "email": "srousel5@youtu.be",
+  "password": "password"
+}, {
+  
+  "name": "Sarah McPherson",
+  "email": "lgoldney6@bbc.co.uk",
+  "password": "password"
+}, {
+  
+  "name": "Ollie Hughes",
+  "email": "rmylchreest7@jiathis.com",
+  "password": "password"
+}, {
+  
+  "name": "Olivia Butcher",
+  "email": "amorford8@indiegogo.com",
+  "password": "password"
+}, {
+  
+  "name": "Miles Cooper",
+  "email": "snassie9@walmart.com",
+  "password": "password"
+}]
 
-const users = [
-  {
-    id: 1,
-    email: 'schamp0@wired.com',
-    password: 'password',
-    isAdmin: 'true',
-  },
-  {
-    id: 2,
-    email: 'cglantz1@ameblo.jp',
-    password: 'password',
-  },
-  {
-    id: 3,
-    email: 'mcranmer2@nifty.com',
-    password: 'password',
-  },
-  {
-    id: 4,
-    email: 'enitti3@printfriendly.com',
-    password: 'password',
-  },
-  {
-    id: 5,
-    email: 'jhuggen4@ucoz.com',
-    password: 'password',
-  },
-  {
-    id: 6,
-    email: 'srousel5@youtu.be',
-    password: 'password',
-  },
-  {
-    id: 7,
-    email: 'lgoldney6@bbc.co.uk',
-    password: 'password',
-  },
-  {
-    id: 8,
-    email: 'rmylchreest7@jiathis.com',
-    password: 'password',
-  },
-  {
-    id: 9,
-    email: 'amorford8@indiegogo.com',
-    password: 'password',
-  },
-  {
-    id: 10,
-    email: 'snassie9@walmart.com',
-    password: 'password',
-  },
-];
+
 
 db
   .sync({ force: true })

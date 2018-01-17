@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 //import {MdPerson} from 'react-icons/lib/md';
+import {withRouter,Link} from 'react-router-dom'
 import {TiShoppingCart,TiUserOutline} from 'react-icons/lib/ti';
 import { Input, Icon, Modal, Header, Dropdown} from 'semantic-ui-react'
 
@@ -28,10 +29,10 @@ class NavBar extends Component {
 		};
 	}
 	render() {
-		const {loggedIn,logout, changeSearch, toggleCart} = this.props
+		const {history, user, loggedIn,logout, changeSearch, toggleCart} = this.props
 		return (
 			<div style={container}>
-				<img style={logo} src="ty-logo.png"></img>
+				<img style={logo} src="/ty-logo.png"></img>
 				<div style={searchBar}>
 					<Input
 					fluid
@@ -54,6 +55,12 @@ class NavBar extends Component {
 									<Icon name='log out' className='left floated' />
         					Logout
 								</Dropdown.Item>
+								{user.isAdmin &&
+									<Dropdown.Item onClick={()=>history.push("/admin/users")}>
+										<Icon name='setting' className='left floated' />
+	        					Admin
+									</Dropdown.Item>
+								}
 							</Dropdown.Menu>
 						</Dropdown>
 					</div>
@@ -114,4 +121,4 @@ const styles = {
 }
 //<TiUserOutline onClick={()=>logout()} size={30} style={profileIcon}/>
 const {container, logo, profileIcon, searchBar, cartContainer, cartIcon} = styles
-export default NavBar;
+export default withRouter(NavBar);
