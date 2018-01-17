@@ -56,7 +56,7 @@ export const putProduct = (productId, formData) =>
       .then(product => {
         const action = editProduct(product);
         dispatch(action);
-        history.push(`/products/${product.id}`)  // redirects to newly-EDITED product page
+        //history.push(`/products/${product.id}`)  // redirects to newly-EDITED product page
       })
       .catch(err => console.log(err))
 
@@ -84,11 +84,14 @@ export default function (state = {products: [], category: 'All', search: "", ord
       return {...state, products: [...state.products,action.products]}
 
     case EDIT_PRODUCT: {
-      const itemToEdit = state.products.find(product => product.id === action.product.id);
-      const indexOfItemToEdit = state.indexOf(itemToEdit);
-      let newState = [...state];
-      newState.splice(indexOfItemToEdit, 1, action.product);
-      return {...state, products: newState};
+      console.log(action.product)
+      const updatedProduct = action.product[0]
+      const {name, description, price, inventoryQuantity} = updatedProduct
+      const newProducts = state.products.map(stateProduct =>{
+        if(stateProduct.id === updatedProduct.id) return {...stateProduct, name, description, price, inventoryQuantity}
+        return stateProduct
+      })
+      return {...state, products: newProducts};
     }
 
     case DELETE_PRODUCT: {

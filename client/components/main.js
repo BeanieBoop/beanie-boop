@@ -28,10 +28,10 @@ class Main extends Component {
     this.setState({visible: !this.state.visible})
   }
   render() {
-    const {children, handleClick, isLoggedIn, changeOrder, changeSearch,logout} = this.props
+    const {children, handleClick, isLoggedIn, changeOrder, changeSearch,logout,user} = this.props
     return (
       <div>
-        <NavBar logout={logout} toggleCart={this.handleSidebar} changeOrder={changeOrder} changeSearch={changeSearch} loggedIn={isLoggedIn}/>
+        <NavBar user={user} logout={logout} toggleCart={this.handleSidebar} changeOrder={changeOrder} changeSearch={changeSearch} loggedIn={isLoggedIn}/>
         <Sidebar.Pushable as={"div"}>
             <Sidebar
               as={Segment} className="sideBarSegment" animation='overlay' width='wide' direction='right' visible={this.state.visible} icon='labeled' vertical
@@ -74,7 +74,8 @@ class Main extends Component {
  */
 const mapState = (state) => {
   return {
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.currentUser.id,
+    user: state.user.currentUser
   }
 }
 

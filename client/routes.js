@@ -13,6 +13,7 @@ import {
   ProductsCard,
   ProductInfo,
   Cart,
+  AdminContainer
 } from './components'
 
 import {
@@ -41,6 +42,8 @@ class Routes extends Component {
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
             <Route path="/cart" component={Cart} />
+            <Route path="/admin/:adminId" component={AdminContainer} />
+            <Route path="/category/:catId" component={ProductsContainer} />
             <Route path="/products/:id" component={ProductInfo} />
           </Switch>
         </Main>
@@ -57,7 +60,7 @@ const mapState = (state) => {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
     products: state.products,
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.currentUser.id
   }
 }
 

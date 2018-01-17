@@ -102,34 +102,34 @@ const products = [{
 }]
 
 const orders = [{
-  "id": 1,
+
   "userId": null
 }, {
-  "id": 2,
+
   "userId": 6
 }, {
-  "id": 3,
+
   "userId": 9
 }, {
-  "id": 4,
+
   "userId": 3
 }, {
-  "id": 5,
+
   "userId": 3
 }, {
-  "id": 6,
-  // "userId": null
+
+  "userId": null
 }, {
-  "id": 7,
+
   "userId": 1
 }, {
-  "id": 8,
+
   "userId": 7
 }, {
-  "id": 9,
+
   "userId": 8
 }, {
-  "id": 10,
+
   "userId": 8
 }]
 
@@ -259,43 +259,53 @@ const reviews = [{
 
 const users = [{
   "id": 1,
+  "name": "Harry Miles",
   "email": "schamp0@wired.com",
   "password": "password",
   "isAdmin": "true"
 }, {
   "id": 2,
+  "name": "David Jones",
   "email": "cglantz1@ameblo.jp",
   "password": "password"
 }, {
   "id": 3,
+  "name": "Dawn Harris",
   "email": "mcranmer2@nifty.com",
   "password": "password"
 }, {
   "id": 4,
+  "name": "Mary Booth",
   "email": "enitti3@printfriendly.com",
   "password": "password"
 }, {
   "id": 5,
+  "name": "Steve Miller",
   "email": "jhuggen4@ucoz.com",
   "password": "password"
 }, {
   "id": 6,
+  "name": "Roger Riley",
   "email": "srousel5@youtu.be",
   "password": "password"
 }, {
   "id": 7,
+  "name": "Sarah McPherson",
   "email": "lgoldney6@bbc.co.uk",
   "password": "password"
 }, {
   "id": 8,
+  "name": "Ollie Hughes",
   "email": "rmylchreest7@jiathis.com",
   "password": "password"
 }, {
   "id": 9,
+  "name": "Olivia Butcher",
   "email": "amorford8@indiegogo.com",
   "password": "password"
 }, {
   "id": 10,
+  "name": "Miles Cooper",
   "email": "snassie9@walmart.com",
   "password": "password"
 }]

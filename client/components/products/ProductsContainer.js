@@ -57,14 +57,15 @@ function orderProducts(products, order){
 		})
 	}
 }
-function filterProducts(products, category,search){
-  if(category === 'All') return searchProducts(search, products);
-	return searchProducts(search ,products.filter(product => product.category.name === category))
+function filterProducts(products, category,search,props){
+	const {catId} = props.match.params
+  if(!catId) return searchProducts(search, products);
+	return searchProducts(search ,products.filter(product => product.category.id === +catId))
 }
 
 function mapState(state,props){
   return {
-    products: orderProducts(filterProducts(state.products.products, state.products.category,state.products.search),state.products.order),
+    products: orderProducts(filterProducts(state.products.products, state.products.category,state.products.search,props),state.products.order),
 		category: state.products.category,
 		categories: state.categories
   }
