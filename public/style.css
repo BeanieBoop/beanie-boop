@@ -41,3 +41,7 @@ form div {
   width: 350px;
   border-left: '2px solid #ccc';
 }
+
+.ui.steps .step.active .title {
+  color: #21ba45;
+}

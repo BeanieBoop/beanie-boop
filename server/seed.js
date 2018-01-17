@@ -14,9 +14,13 @@ const categories = [
     description: 'Beanie babies from Frozen™!',
   },
   {
-    name: 'Underwater',
-    description: 'Underwater beanie babies!',
+    name: 'Beanie Boos',
+    description: 'Beanie babies from Frozen™!',
   },
+  {
+    name: 'Beanie Buddies',
+    description: 'Beanie babies from Frozen™!',
+  }
 ];
 
 
@@ -63,55 +67,124 @@ const products = [{
   "imgUrl": "/pictures/captainAmerica.gif",
   "categoryId": 1
 }, {
-  "name": "Spotted hyena",
-  "description": "Crocuta crocuta",
-  "price": 226,
-  "inventoryQuantity": 73,
-  "imgUrl": "https://robohash.org/perferendismagniet.png?size=50x50&set=set1",
-  "categoryId": 1
-}, {
-  "name": "Cow",
-  "description": "Coracias caudata",
-  "price": 967,
-  "inventoryQuantity": 38,
-  "imgUrl": "https://robohash.org/autipsamprovident.png?size=50x50&set=set1",
-  "categoryId": 2
-}, {
-  "name": "Leopard",
-  "description": "Panthera pardus",
-  "price": 946,
-  "inventoryQuantity": 3,
-  "imgUrl": "https://robohash.org/quiaiureaut.png?size=50x50&set=set1",
-  "categoryId": 1
-}, {
-  "name": "Indian mynah",
-  "description": "Acridotheres tristis",
-  "price": 227,
-  "inventoryQuantity": 80,
-  "imgUrl": "https://robohash.org/commodiexercitationemiure.png?size=50x50&set=set1",
-  "categoryId": 4
-}]
+    name: 'Frozen™ Bean Olaf with candy cane nose',
+    description: 'Crocuta crocuta',
+    price: 226,
+    inventoryQuantity: 73,
+    imgUrl: '/pictures/frozen-bean-olaf-with-candy-cane-nose.jpg',
+    categoryId: 3,
+  },
+  {
+    name: 'Frozen™ collection set beanie babies',
+    description: 'Coracias caudata',
+    price: 967,
+    inventoryQuantity: 38,
+    imgUrl: '/pictures/frozen-collection-set-beanie-babies.jpg',
+    categoryId: 3,
+  },
+  {
+    name: 'Frozen™ Olaf beanie baby',
+    description: 'Panthera pardus',
+    price: 946,
+    inventoryQuantity: 3,
+    imgUrl: '/pictures/frozen-olaf-beanie-baby.jpg',
+    categoryId: 3,
+  },
+  {
+    name: 'Frozen™ Sven beanie baby',
+    description: 'Acridotheres tristis',
+    price: 227,
+    inventoryQuantity: 80,
+    imgUrl: '/pictures/frozen-sven-beanie-baby.jpg',
+    categoryId: 3,
+  },
+  {
+    name: 'Frozen™ ty-beanie baby Christmas Olaf',
+    description: 'Acridotheres tristis',
+    price: 227,
+    inventoryQuantity: 80,
+    imgUrl: '/pictures/frozen-ty-beanie-babies-christmas-olaf.jpg',
+    categoryId: 3,
+  },
+  {
+    name: 'Baby Fox',
+    description: 'Acridotheres tristis',
+    price: 227,
+    inventoryQuantity: 80,
+    imgUrl: '/pictures/Beanie_Boo_Baby_Fox.png',
+    categoryId: 4,
+  },
+  {
+    name: 'Kitten',
+    description: 'Acridotheres tristis',
+    price: 227,
+    inventoryQuantity: 80,
+    imgUrl: '/pictures/Beanie_Boo_Kitten.png',
+    categoryId: 4,
+  },
+  {
+    name: 'Puppy',
+    description: 'Acridotheres tristis',
+    price: 227,
+    inventoryQuantity: 80,
+    imgUrl: '/pictures/Beanie_Boo_Puppy.png',
+    categoryId: 4,
+  },
+  {
+    name: 'Bull',
+    description: 'Acridotheres tristis',
+    price: 327,
+    inventoryQuantity: 80,
+    imgUrl: '/pictures/Beanie_Buddy_Bull.jpg',
+    categoryId: 5,
+  },
+  {
+    name: 'Cat',
+    description: 'Acridotheres tristis',
+    price: 427,
+    inventoryQuantity: 80,
+    imgUrl: '/pictures/Beanie_Buddy_Cat.jpg',
+    categoryId: 5,
+  },
+  {
+    name: 'Monkey',
+    description: 'Acridotheres tristis',
+    price: 127,
+    inventoryQuantity: 80,
+    imgUrl: '/pictures/Beanie_Buddy_Monkey.jpg',
+    categoryId: 5,
+  }
+]
 
 const orders = [{
   "status": 'closed',
   "userId": null
 }, {
+  "status": 'closed',
   "userId": 6
 }, {
+  "status": 'closed',
   "userId": 9
 }, {
+  "status": 'closed',
   "userId": 3
 }, {
+  "status": 'closed',
   "userId": 3
 }, {
+  "status": 'in-process',
   "userId": null
 }, {
+  "status": 'in-process',
   "userId": 1
 }, {
+  "status": 'delivery',
   "userId": 7
 }, {
+  "status": 'delivery',
   "userId": 8
 }, {
+  "status": 'delivery',
   "userId": 8
 }]
 
@@ -221,53 +294,53 @@ const reviews = [{
 
 
 const users = [{
-  
+
   "name": "Harry Miles",
   "email": "schamp0@wired.com",
   "password": "password",
   "isAdmin": "true"
 }, {
-  
+
   "name": "David Jones",
   "email": "cglantz1@ameblo.jp",
   "password": "password"
 }, {
-  
+
   "name": "Dawn Harris",
   "email": "mcranmer2@nifty.com",
   "password": "password"
 }, {
-  
+
   "name": "Mary Booth",
   "email": "enitti3@printfriendly.com",
   "password": "password"
 }, {
-  
+
   "name": "Steve Miller",
   "email": "jhuggen4@ucoz.com",
   "password": "password"
 }, {
-  
+
   "name": "Roger Riley",
   "email": "srousel5@youtu.be",
   "password": "password"
 }, {
-  
+
   "name": "Sarah McPherson",
   "email": "lgoldney6@bbc.co.uk",
   "password": "password"
 }, {
-  
+
   "name": "Ollie Hughes",
   "email": "rmylchreest7@jiathis.com",
   "password": "password"
 }, {
-  
+
   "name": "Olivia Butcher",
   "email": "amorford8@indiegogo.com",
   "password": "password"
 }, {
-  
+
   "name": "Miles Cooper",
   "email": "snassie9@walmart.com",
   "password": "password"

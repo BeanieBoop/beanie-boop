@@ -6,13 +6,13 @@ import AdminUsers from './AdminUsers'
 import AdminProducts from './AdminProducts'
 import AdminOrders from './AdminOrders'
 
-const AdminWrapper = ({categories,users, makeAdminThunk,products,putProduct}) => (
+const AdminWrapper = ({categories,users, makeAdminThunk,products,putProduct,putOrder,orders}) => (
 	<div>
 		<AdminNav categories={categories}/>
 			<Switch>
 				<Route path="/admin/users" render={()=><AdminUsers makeAdmin={makeAdminThunk} users={users}/>} />
 				<Route path="/admin/products" render={()=><AdminProducts putProduct={putProduct} products={products}/>} />
-				<Route path="/admin/orders" component={AdminOrders} />
+				<Route path="/admin/orders" render={()=><AdminOrders putOrder={putOrder} orders={orders} products={products}/>}  />
 			</Switch>
 	</div>
 );
