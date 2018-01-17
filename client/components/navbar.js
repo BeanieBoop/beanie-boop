@@ -2,14 +2,11 @@ import React, { Component } from 'react';
 //import {MdPerson} from 'react-icons/lib/md';
 import {withRouter,Link} from 'react-router-dom'
 import {TiShoppingCart,TiUserOutline} from 'react-icons/lib/ti';
-import { Input, Icon, Modal, Header, Dropdown} from 'semantic-ui-react'
+import { Input, Icon, Modal, Header, Dropdown,Label} from 'semantic-ui-react'
 
 import {Login} from './index'
 
-const options = [
-  { key: 1, text: 'Choice 1', value: 1 },
-  { key: 2, text: 'Choice 2', value: 2 },
-]
+
 const trigger = (
   <span>
     <TiUserOutline size={30} style={{
@@ -29,10 +26,13 @@ class NavBar extends Component {
 		};
 	}
 	render() {
-		const {history, user, loggedIn,logout, changeSearch, toggleCart} = this.props
+		const {cart,history, user, loggedIn,logout, changeSearch, toggleCart} = this.props
 		return (
 			<div style={container}>
-				<img style={logo} src="/ty-logo.png"></img>
+				<Link to="/">
+					<img style={logo} src="/ty-logo.png"></img>
+				</Link>
+
 				<div style={searchBar}>
 					<Input
 					fluid
@@ -45,7 +45,8 @@ class NavBar extends Component {
 		  	/>
 				</div>
 				<div style={cartContainer}>
-					<TiShoppingCart size={30} onClick={toggleCart} style={cartIcon}/>
+					<TiShoppingCart size={30} onClick={toggleCart} style={cart.length ? cartIcon: emptyCart}/>
+					{cart.length ? <div style={styles.label}>{cart.length}</div> : ""}
 				</div>
 				{loggedIn ? (
 					<div style={{marginRight: "30px"}}>
@@ -81,6 +82,20 @@ class NavBar extends Component {
 }
 
 const styles = {
+	label: {
+		display: 'flex',
+		alignItems: 'center',
+		justifyContent: 'center',
+		color: "white",
+		background:"red",
+		fontSize: "10px",
+		width: '15px',
+		height: "15px",
+		borderRadius: "15px",
+		position: 'relative',
+		top: "-10px",
+		left: '-10px'
+	},
 	container: {
 		background: 'white',
 		height: "55px",
@@ -102,6 +117,10 @@ const styles = {
 		color: "rgba(0,0,0,.4)",
 		marginLeft: "10px"
 	},
+	emptyCart: {
+		color: "white",
+		marginLeft: "10px"
+	},
 	profileIcon: {
 		color: "rgba(0,0,0,.4)",
 		marginLeft: "30px",
@@ -120,5 +139,5 @@ const styles = {
 	}
 }
 //<TiUserOutline onClick={()=>logout()} size={30} style={profileIcon}/>
-const {container, logo, profileIcon, searchBar, cartContainer, cartIcon} = styles
+const {container, logo, profileIcon, searchBar, cartContainer, cartIcon, emptyCart} = styles
 export default withRouter(NavBar);

@@ -47,7 +47,7 @@ export const putOrder = (orderId, formData) =>
       .then(order => {
         const action = editOrder(order);
         dispatch(action);
-        history.push(`/orders/${order.id}`)  // redirects to newly-EDITED order page
+        //history.push(`/orders/${order.id}`)  // redirects to newly-EDITED order page
       })
       .catch(err => console.log(err))
 

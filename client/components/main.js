@@ -6,7 +6,6 @@ import {logout} from '../store'
 import {bindActionCreators} from 'redux';
 import { Sidebar,Icon, Segment,Menu} from 'semantic-ui-react';
 import {changeSearch, changeOrder} from '../store/products'
-
 import NavBar from './NavBar'
 import CartBarContainer from './CartBarContainer'
 /**
@@ -28,55 +27,35 @@ class Main extends Component {
   handleSidebar(){
     this.setState({visible: !this.state.visible})
   }
+  createNotification(){
+    return NotificationManager.success('Success message', 'Title here');
+  }
   render() {
-    const {children, handleClick, isLoggedIn, changeOrder, changeSearch,logout,user} = this.props
+    const {cart,children, handleClick, isLoggedIn, changeOrder, changeSearch,logout,user} = this.props
     return (
       <div>
-        <NavBar user={user} logout={logout} toggleCart={this.handleSidebar} changeOrder={changeOrder} changeSearch={changeSearch} loggedIn={isLoggedIn}/>
+        <NavBar cart={cart} user={user} logout={logout} toggleCart={this.handleSidebar} changeOrder={changeOrder} changeSearch={changeSearch} loggedIn={isLoggedIn}/>
         <Sidebar.Pushable as={"div"}>
             <Sidebar
-              as={Segment} className="sideBarSegment" animation='overlay' width='wide' direction='right' visible={this.state.visible} icon='labeled' vertical
+              as={Segment} className="sideBarSegment" animation='overlay' width='wide' direction='right' visible={cart.length && this.state.visible} icon='labeled' vertical
             >
-              <CartBarContainer />
+              <CartBarContainer/>
             </Sidebar>
             <Sidebar.Pusher>
               {children}
             </Sidebar.Pusher>
           </Sidebar.Pushable>
-
       </div>
     );
   }
 
 }
 
-
-// const Main = ({children, handleClick, isLoggedIn, changeOrder, changeSearch,logout}) => {
-//   return (
-//     <div>
-//       <NavBar logout={logout} changeOrder={changeOrder} changeSearch={changeSearch} loggedIn={isLoggedIn}/>
-//       <Sidebar.Pushable as={"div"}>
-//           <Sidebar
-//             as={Segment} className="sideBarSegment" animation='overlay' width='wide' direction='right' visible={false} icon='labeled' vertical
-//           >
-//             Cat container
-//           </Sidebar>
-//           <Sidebar.Pusher>
-//             {children}
-//           </Sidebar.Pusher>
-//         </Sidebar.Pushable>
-//
-//     </div>
-//   )
-// }
-
-/**
- * CONTAINER
- */
 const mapState = (state) => {
   return {
     isLoggedIn: !!state.user.currentUser.id,
-    user: state.user.currentUser
+    user: state.user.currentUser,
+    cart: state.lineItems
   }
 }
 

@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import {fetchOrders} from '../../store/orders'
 import {fetchUsers,makeAdminThunk} from '../../store/user'
 import {putProduct} from '../../store/products'
+import {putOrder} from '../../store/orders'
 
 
 import AdminWrapper from './components/AdminWrapper'
@@ -32,7 +33,7 @@ function mapState(state,props){
 }
 
 function mapDispatch(dispatch){
-  return bindActionCreators({fetchOrders,fetchUsers,makeAdminThunk,putProduct},dispatch)
+  return bindActionCreators({fetchOrders,fetchUsers,makeAdminThunk,putProduct,putOrder},dispatch)
 }
 
 export default connect(mapState,mapDispatch)(AdminContainer)
