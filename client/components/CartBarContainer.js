@@ -43,7 +43,6 @@ class CartBarWrapper extends Component {
   render () {
 
     const { isLoggedIn, lineItems, handleSubmit, order, handleNewFetch} = this.props
-    console.log('gggggggggg',order)
     if (!this.state.clickedCheckoutButton) {
       return <Cart {...this.props} toggleCheckout={this.toggleCheckout} />
     } else {
